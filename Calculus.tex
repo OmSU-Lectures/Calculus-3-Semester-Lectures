@@ -1,0 +1,112 @@
+\documentclass{report}
+\usepackage{cmap}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{setspace,amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{scalerel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage[unicode, pdftex]{hyperref}
+
+\def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
+\def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}
+\newtheorem*{effect}{Следствие}
+\newtheorem{statement}{Утверждение}[section]
+\newtheorem*{remark}{Замечание}
+\newtheorem{lemma}{Лемма}[section]
+\newtheorem{theorem}{Теорема}[section]
+
+\title{Математический Анализ \\ 3 семестр}
+\author{Данил Заблоцкий}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Название}
+
+\section{Название}
+
+\begin{effect}
+  $D$ - область в $\mathbb{R}^n, \ f:D\rightarrow\mathbb{R}$ дифференцируема на $D$ и $\forall x \in D \ df(x) = 0$, то есть $\forall i \ \frac{\delta f}{\delta x_i} = 0$. Тогда $f - const$.
+\end{effect}
+
+\begin{proof}
+  $x_0 \in D, \ B(x_0, \rho)\subset D, \ \forall x \in B(x_0, \rho), \ [x_0,x] \subset B(x_0,\rho) \subset D. \quad f(x) - f(x_0) = f'(\xi)(x-x_0). \quad f(x) - f(x_0) = 0 \implies f(x) = f(x_0)$.
+
+  Построим путь из точки $x_0$ к некоторой точке $x \in D, \quad \gamma:[0;1]\rightarrow D, \quad \gamma(0) = x_0, \ \gamma(1) = x$. По определению пути, $\gamma$ - непрерывна. Тогда $\exists\delta:$
+  \begin{equation*}
+    \forall 0 \leqslant t \leqslant \delta \implies \forall x \in B(x_0,\rho), \quad \gamma(t) \in B(x_0,\rho) \implies f(\gamma(t)) = f(x_0), \ t \in [0,\delta]
+  \end{equation*}
+
+  Пусть $\Delta = \sup\delta \implies f(\gamma(\Delta)) = f(x_0)$. Покажем, что $\Delta = 1$. Пусть $\Delta < 1 (0 + 1)$. Построим шар $B(\gamma(\Delta),\rho_\Delta) \subset D$. Тогда $\exists \epsilon > 0:$
+  \begin{equation*}
+    \Delta - \epsilon < t < \Delta + \epsilon
+  \end{equation*}
+
+  Но тогда $f(\gamma(\Delta + \epsilon)) = f(x_0)$ (так как точка $\gamma(\Delta + \epsilon) \in B(\gamma(\Delta), \rho_\Delta)$). Это противоречит с тем, что $\Delta = \sup \delta \implies \Delta = 1 \implies \gamma(1) = x, \ f(x) = f(x_0) \implies$ так как $x \in D$ - произвольная точка, то имеем, что $\forall x \in D:$
+  \begin{equation*}
+    f(x) = f(x_0) \implies f(x) - const
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Достаточное условие дифференцируемости функции]
+  Пусть $D$ - область в $\mathbb{R}^n, \ f:D\rightarrow\mathbb{R}, \ f$ имеет непрерывную часть произведения в каждой окрестности точки $x \in D$.
+
+  Тогда $f$ - дифференцируема в точке $x$.
+\end{theorem}
+
+\begin{proof}
+  Без ограничения общности, что окрестность точки $x_0 \in D$ является шаром $B(x_0,\rho)\subset D$.
+
+  Пусть $h:x_0 + h \in B(x_0,\rho)$. Здесь $x_0 = (x^1, \ x^2, \ \ldots, \ x^n), \quad x_0 + h = (x^1 + h^1, \ x^2 + h^2, \ \ldots, \ x^n + h^n)$. Заметим, что точки $x_1 = (x^1, \ x^2 + h^2, \ \ldots, \ x^n + h^n), \ x^2 = (x^1, \ x^2, \ \ldots, \ x^n + h^n), \ \ldots, \ x_{n-1} = (x^1, \ x^2, \ \ldots, x^{n-1} \ x^n + h^n) \in B(x_0,\rho)$.
+
+  $f(x_0 + h) - f(x_0) = f(x_0 + h) - f(x_1) + f(x_1) - f(x_2) + f(x_2) - \ldots - f(x_{n-1}) + f(x_{n-1}) - f(x_0) = f(x^1 + h^1, \ \ldots, \ x^n + h^n) - f(x^1, \ x^2 + h^2, \ \ldots, \ x^n + h^n) + f(x^1, \ x^2 + h^2, \ \ldots, \ x^n + h^n) - f(x^1, \ x^2, \ \ldots, \ x^n + h^n) + f(x^1, \ x^2, \ \ldots, \ x^n + h^n) - \ldots - f(x^1, \ x^2, \ \ldots, \ x^{n-1}, \ x^n) + f(x^1, \ x^2, \ \ldots, \ x^{n-1}, \ x^n + h^n) - f(x^1, \ x^2, \ \ldots, \ x^n) = \left| Lagranj \ theorem \ for \ 1 \ variable \right| = \frac{\delta f}{\delta x_1}(x^1 + \theta^1 h^1, \ x^2 + h^2, \ \ldots, \ x^n + h^n) \cdot h^1 + \frac{\delta f}{\delta x^2}(x^1, \ x^2 + \theta^2 h^2, \ \ldots, \ x^n + h^n) \cdot h^2 + \ldots + \frac{\delta f}{\delta x^n}(x^1, \ x^2, \ \ldots, \ x^n + \theta^n h^n) \cdot h^n$.
+
+  Используя непрерывность частных производных, запишем: $f(x_0 + h) - f(x_0) = \frac{\delta f}{\delta x_1}(x^1, \ x^2, \ \ldots, \ x^n) \cdot h^1 + \alpha^1(h^1) + \ldots + \frac{\delta f}{\delta x_n}(x^1, \ x^2, \ \ldots, \ x^n) \cdot h^2 + \alpha^n(h^n)$, где $\alpha^1,\alpha^2,\ldots,\alpha^n$ стремятся к нулю при $h\rightarrow0$.
+
+  Это означает, что $f(x_0 + h) - f(x_0) = L(x_0)\cdot h + \underset{h\rightarrow0}{o}(h)$, где $L(x_0) = \frac{\delta f}{\delta x_1}(x_0)h^1 + \ldots + \frac{\delta f}{\delta x^n}(x_0) \cdot h^n = df(x_0) \implies$ по определению $f(x)$ дифференцируема в точке $x_0$.
+\end{proof}
+
+\section{Производные высших порядков}
+
+\begin{definition}[Вторая производная по двум переменным]
+  Пусть $f:D\rightarrow\mathbb{R}, \ D$ - область в $\mathbb{R}^n$. Производная по переменной $x^i$ от производной по переменной $x^j$ называется \textbf{второй производной} функции $f$ по переменным $x^i, x^j$ и обозначается:
+  \begin{equation*}
+    \frac{\delta^2 f}{\delta x^i \delta x^j}(x), \quad f_{x^ix^j}''(x)
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}[О смешанных производных]
+  Пусть $D$ - область в $\mathbb{R}^n, \ f: D\rightarrow\mathbb{R}, \ x \in D, \ f$ имеет в $D$ непрерывно смешанные производные (2-го порядка).
+
+  Тогда эти производные не зависят от порядка дифференцирования.
+\end{theorem}
+
+\begin{proof}
+  Пусть $\frac{\delta^2 f}{\delta x^i \delta x^j}$ и $\frac{\delta^2 f}{\delta x^j \delta x^i}$ - непрерывны в точке $x \in D$. Так как остальные переменные фиксированы, то можно считать, что $f$ зависит только от двух переменных.
+
+  Тогда $D\subset\mathbb{R}^2, \ f:D\rightarrow\mathbb{R}$ и $\frac{\delta^2 f}{\delta x \delta y}$ и $\frac{\delta^2 f}{\delta y \delta x}$ - непрерывны в точке $x_0 = (x,y) \in D$.
+
+  Покажем, что $\frac{\delta^2 f}{\delta x \delta y} = \frac{\delta^2 f}{\delta y \delta x}$.
+
+  Рассмотрим функции $\phi(t) = f(x+t\cdot\Delta x, \ y + \Delta y) - f(x+t\cdot\Delta x, \ y), \ \psi(t) = f(x + \Delta x, \ y + t\cdot\Delta y) - f(x, \ y + t \cdot \Delta y), \ t \in [0;1]$.
+
+  Имеем, что $\phi(1) - \phi(0) = f(x + \Delta x, \ y + \Delta y) = f(x + \Delta x, \ y) - f(x, \ y + \Delta y) + f(x, \ y)$.
+
+  $\psi(1) - \psi(0) = f(x + \Delta x, \ y + \Delta y) - f(x, \ y + \Delta y) - f(x + \Delta x, \ y) + f(x, \ y)$.
+
+  Тогда $\phi(1) - \phi(0) = \psi(1) - \psi(0)$.
+\end{proof}
+
+\end{document}
