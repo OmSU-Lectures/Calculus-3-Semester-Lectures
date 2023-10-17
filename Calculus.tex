@@ -10,7 +10,10 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{wrapfig}
+\usepackage{pgfplots}
 \usepackage[unicode, pdftex]{hyperref}
+
+\pgfplotsset{compat=1.9}
 
 \def\stretchint#1{\vcenter{\hbox{\stretchto[440]{\displaystyle\int}{#1}}}}
 \def\scaleint#1{\vcenter{\hbox{\scaleto[3ex]{\displaystyle\int}{#1}}}}
@@ -107,6 +110,1383 @@
   $\psi(1) - \psi(0) = f(x + \Delta x, \ y + \Delta y) - f(x, \ y + \Delta y) - f(x + \Delta x, \ y) + f(x, \ y)$.
 
   Тогда $\phi(1) - \phi(0) = \psi(1) - \psi(0)$.
+
+  Тут нужно дописать, фотки в галерее
+\end{proof}
+
+\begin{proof}
+  Рассмотрим функцию $\phi(t) = f(x + th)$. Применим формулу Тейлора к $\phi(t)$:
+  \begin{center}
+    $\phi(1) = \phi(0) + \frac{1}{1!} \cdot \phi'(0) \cdot (1-0) + \frac{1}{2!} \cdot \phi''(0) \cdot (1-0)^2 + \frac{1}{3!} \cdot \phi'''(0) \cdot (1-0)^3 + \ldots$ \\
+    $ + \frac{1}{k!} \cdot \phi^{(k)} \cdot (1-0)^k$ \\
+  \end{center}
+  $\phi(1) = f(x + h); \quad \phi(0) = f(x);$ \\
+
+  $\phi'(0) = f'(x + th) \cdot (x + th)_k'\big|_{t = 0} = \left(\frac{\delta f(x + th)}{\delta x^1} \ \frac{\delta f(x + th)}{\delta x^2} \ \ldots \ \frac{\delta f(x + th)}{\delta x^n}\right) \cdot \left(\begin{array}{c}
+        h^1    \\
+        h^2    \\
+        \vdots \\
+        h^n
+      \end{array}\right) =$ \\
+  $= (\frac{\delta f(x + th)}{\delta x^1} \cdot h' + \frac{\delta f(x+th)}{\delta x^2} \cdot h^2 + \ldots + \frac{\delta f}{\delta x^n}(x + th)\cdot h^n) \big|_{t=0} = \frac{\delta f(x)}{\delta x^1}\cdot h^1 + \frac{\delta f}{\delta x^2}(x)\cdot h^2 + \ldots + \frac{\delta f}{\delta x^n}(x) \cdot h^n = (\frac{\delta}{\delta x^1} \cdot h^1 + \ldots + \frac{\delta}{\delta x^n}\cdot h^n)f(x)$. \\
+
+  $\phi''(0) = (\sum_{i = 1}^{n} \frac{\delta f(x + th)}{\delta x^i}h^i)_t' \big|_{t = 0} = (\sum_{i = 1}^{n} \sum_{j = 1}^{n} \frac{\delta^2 f(x + th)}{\delta x^i \ \delta x^j} h^i h^j) \big|_{t = 0} = \sum_{i = 1}^{n}\sum_{j = 1}^{n}\frac{\delta^2 f(x)}{\delta x^i \ \delta x^j} h^i h^j = (\frac{\delta}{\delta x^1} + \ldots + \frac{\delta}{\delta x^n}h^n)^2 f(x)$
+
+  И так далее. Подстановки получившиеся выражаем в $(*)$ и получим искомое.
+\end{proof}
+
+\section{Экстремумы функций многих переменных}
+
+\begin{definition}
+  Пусть $X$ - метрическое пространство $f:X \rightarrow \mathbb{R}$. Точка $x_0 \in X$ называется \textbf{точкой локального максимума (минимума)}, если:
+  \begin{equation*}
+    \exists u(x_0)\subset X: \ \forall x \in u(x_0) \quad f(x)\leqslant f(x_0) \ (f(x)\geqslant f(x_0))
+  \end{equation*}
+
+  Точки локального максимума и минимума называются \textbf{точками локального экстремума}.
+\end{definition}
+
+\begin{theorem}[Необходимое условие локального экстремума]
+  Пусть $D$ - область в $\mathbb{R}^n, \ f : D\rightarrow\mathbb{R}, \ x_0 \in D$ - точка локального экстремума, тогда в точке $x_0$
+  \begin{equation*}
+    \forall i = \overline{1,n} \quad \frac{\delta f(x_0)}{\delta x^i} = 0
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Фиксируем все переменные за исключением $x^i$, тогда можно рассмотреть $f(x^1, \ldots, x^i, \ldots x^n)$ как функцию одной переменной, для которой $x_0$ - точка локального экстремума $\implies \frac{\delta f}{\delta x^i}(x_0) = 0$.
+
+  $i$ - произвольная $\implies \forall i$ - выполняется.
+\end{proof}
+
+\begin{definition}
+  Пусть $D$ - область в $\mathbb{R}^n, \ f:D\rightarrow\mathbb{R}^k$ - дифференцируемо в точке $x_0 \in D, \ x_0$ называется \textbf{критической точкой функции} $f(x)$, если
+  \begin{equation*}
+    rank \mathfrak{I} f(x_0) < min(n,k),
+  \end{equation*}
+  где $\mathfrak{I} f(x_0)$ - матрица Якоби функции $f(x_0)$.
+\end{definition}
+
+\begin{example}
+  $f:\mathbb{R}^3 \rightarrow\mathbb{R}^2$ \\
+
+  $f(x,y,z) = \left(\begin{array}{c}
+        x\cdot y \\
+        y - z
+      \end{array}\right) = \left(\begin{array}{c}
+        u \\
+        v
+      \end{array}\right)$ \\
+
+  $\mathfrak{I} f(x,y,z) = \left( \begin{array}{ccc}
+        \frac{\delta u}{\delta x} & \frac{\delta u}{\delta y} & \frac{\delta u}{\delta z} \\
+        \frac{\delta v}{\delta x} & \frac{\delta v}{\delta y} & \frac{\delta v}{\delta z}
+      \end{array} \right) = \left( \begin{array}{ccc}
+        y & x & 0  \\
+        0 & 1 & -1
+      \end{array} \right) \implies \left\{ \begin{array}{l}
+      x = 0 \\
+      y = 0 \\
+      z = t
+    \end{array}\right. - (x_0)$ (критические точки)
+
+  $n = 3, \ k = 2$ \\
+
+  Множество точек прямой, получаемой пересечением плоскостей $x = 0$ и $y = 0$ - множество критических точек функции $f(x,y,z)$.
+\end{example}
+
+\begin{definition}
+  Пусть $D$ - область в $\mathbb{R}^n, \ f:D\rightarrow\mathbb{R}^n, \ f$ имеет непрерывные вторые производные в точке $x_0 \in D$. На касательном пространстве $T\mathbb{R}^n_{(x_0)}$ определим квадратичную форму
+  \begin{equation*}
+    Q(h) = \sum_{i,j = 1}^{n}\frac{\delta^2 f}{\delta x^i \delta x^j}(x_0)h^i\cdot h^j
+  \end{equation*}
+  \begin{equation*}
+    Q:T\mathbb{R}^n \rightarrow \mathbb{R}
+  \end{equation*}
+\end{definition}
+
+\begin{center}
+  ${\Large 02.10}$
+\end{center}
+
+\begin{example}
+  $S = \mathbb{R}^n$ - поверхность в $\mathbb{R}^n$
+  \begin{equation*}
+    t^i(x^i) = \frac{\pi}{2}\cdot \arctan x^i
+  \end{equation*}
+  $\mathfrak{I} = \left(\begin{array}{cccc}
+        \frac{\delta t^1}{\delta x^1} & \frac{\delta t^1}{\delta x^2} & \ldots & \frac{\delta t^1}{\delta x^n} \\
+        \frac{\delta t^2}{\delta x^1} & \frac{\delta t^2}{\delta x^2} & \ldots & \frac{\delta t^2}{\delta x^n} \\
+        \vdots                        & \vdots                        & \ddots & \vdots                        \\
+        \frac{\delta t^n}{\delta x^1} & \frac{\delta t^n}{\delta x^2} & \ldots & \frac{\delta t^n}{\delta x^n} \\
+      \end{array}\right) = \left(\begin{array}{cccc}
+        \frac{2}{\pi} \cdot \frac{1}{1 + (x^1)^2} & 0                                         & \ldots & 0                                         \\
+        0                                         & \frac{2}{\pi} \cdot \frac{1}{1 + (x^2)^2} & \ldots & 0                                         \\
+        \vdots                                    & \vdots                                    & \ddots & \vdots                                    \\
+        0                                         & 0                                         & \ldots & \frac{2}{\pi} \cdot \frac{1}{1 + (x^n)^2}
+      \end{array}\right)$
+\end{example}
+
+\begin{statement}
+  Пусть задана система уравнений
+  \begin{equation*}
+    \left\{\begin{array}{l}
+      F^1(x^1,\ldots,x^n) = 0 \\
+      \vdots                  \\
+      F^{n-k}(x^1,\ldots,x^n) = 0
+    \end{array}\right.,
+  \end{equation*}
+  здесь $F^i(x)\in C^{(1)}$.
+
+  Кроме того,
+  \begin{equation*}
+    \left|\begin{array}{ccc}
+      \frac{\delta F^1}{\delta x^1}     & \ldots & \frac{\delta F^1}{\delta x^n}     \\
+      \vdots                            & \ddots & \vdots                            \\
+      \frac{\delta F^{n-k}}{\delta x^1} & \ldots & \frac{\delta F^{n-k}}{\delta x^n}
+    \end{array}\right|(x) \ne 0, \quad \forall x \in \mathbb{R}^n
+  \end{equation*}
+
+  Тогда решение этой системы является $k$-мерной поверхностью в $\mathbb{R}^n$.
+\end{statement}
+
+\begin{proof}
+  По теореме о неявной функции, система
+  \begin{equation*}
+    \left\{\begin{array}{l}
+      F^1(x^1,\ldots,x^n) = 0 \\
+      \vdots                  \\
+      F^{n-k}(x^1,\ldots,x^n) = 0
+    \end{array}\right.
+  \end{equation*}
+  эквивалентна системе
+  \begin{equation*}
+    \left\{\begin{array}{l}
+      x^{k+1} = f^1(x^1,\ldots,x^k) \\
+      x^{k+2} = f^2(x^1,\ldots,x^k) \\
+      \vdots                        \\
+      x^{n-k} = f^{n-k}(x^1,\ldots,x^k)
+    \end{array}\right.
+  \end{equation*}
+
+  Получим: \\
+
+  $t^1 = x^1 \\
+    t^2 = x^2 \\
+    \vdots \\
+    t^k = x^k \\
+    t^{k+1} = x^{k+1} - f^1(x^1,\ldots,x^k) = 0 \\
+    t^{k+2} = x^{k+2} - f^2(x^1,\ldots,x^k) = 0 \\
+    \vdots \\
+    t^{n} = x^{n-k} - f^{n-k}(x^1,\ldots,x^k) = 0$ \\
+
+  Таким образом построенное отображение является диффиоморфизмом $\implies$ решение системы
+  \begin{center}
+    $\left\{\begin{array}{l}
+        F^1(x^1,\ldots,x^n) = 0 \\
+        \vdots                  \\
+        F^{n-k}(x^1,\ldots,x^n) = 0
+      \end{array}\right.$ -- $k$-мерная поверхность в $\mathbb{R}^n$.
+  \end{center}
+\end{proof}
+
+\begin{definition}[Локальная карта или параметризация поверхности, касательное пространство]
+  Пусть $S$ -- $k$-мерная поверхность в $\mathbb{R}^n, \ x_0 \in S$ и $\phi: U(x_0) \rightarrow I^n$ - диффиоморфизм:
+  \begin{equation*}
+    \phi(U(x_0)\cap S) = I^k
+  \end{equation*}
+
+  Ограничение $\phi^{-1}$ на $I^k$ будем называть \textbf{локальной картой} или \textbf{параметризацией поверхности} $S$ в окрестности точки $x_0$.
+
+  \textbf{Касательным пространством} (или плоскостью) к $S$ в точке $x_0$ называется $k$-мерная плоскость, заданная уравнением
+  \begin{equation*}
+    x = x_0 + x'(0) \cdot t, \quad x_0 = (x^1_0,x^1_0,\ldots,x^n_0)
+  \end{equation*}
+  \begin{equation*}
+    x(t) = \left\{\begin{array}{l}
+      x^1(t^1,\ldots,t^k) \\
+      x^2(t^1,\ldots,t^k) \\
+      \vdots              \\
+      x^n(t^1,\ldots,t^k)
+    \end{array}\right., \quad x'(t) = \left(\begin{array}{ccc}
+        \frac{\delta x^1}{\delta t^1} & \ldots & \frac{\delta x^1}{\delta t^k} \\
+        \vdots                        & \ddots & \vdots                        \\
+        \frac{\delta x^n}{\delta t^1} & \ldots & \frac{\delta x^n}{\delta t^k} \\
+      \end{array}\right) (t)
+  \end{equation*}
+
+  Таким образом касательное пространство задается системой (из $x = x_0 + x'(0) \cdot t$)
+  \begin{equation*}
+    \left\{\begin{array}{l}
+      x^1 = x^1_0 + \frac{\delta x^1}{\delta t^1} (0)t^1 + \ldots + \frac{\delta x^1}{t^k}(0)t^k \\
+      x^2 = x^2_0 + \frac{\delta x^2}{\delta t^1} (0)t^1 + \ldots + \frac{\delta x^2}{t^k}(0)t^k \\
+      \vdots                                                                                     \\
+      x^n = x^n_0 + \frac{\delta x^n}{\delta t^1} (0)t^1 + \ldots + \frac{\delta x^n}{t^k}(0)t^k
+    \end{array}\right.
+  \end{equation*}
+\end{definition}
+
+\begin{example}
+  \begin{enumerate}
+    \item Пусть $\gamma = \gamma (t)$ - гладкая кривая в $\mathbb{R}^3, \ \gamma:\left\{\begin{array}{c}
+              x = x(t) \\
+              y = y(t) \\
+              z = z(t)
+            \end{array}\right.$.
+
+          Обозначим $x_0 = x(0), \ y_0 = y(0), \ z_0 = z(0)$.
+
+          $x = x_0 + x'(0) \cdot t: \ x = x_0 + x'(0) \cdot t$ - касательное пространство к кривой $\gamma$ в точке $x_0$
+          \begin{center}
+            $\left\{\begin{array}{l}
+                x = x_0 + x'(0) \cdot t \\
+                y = y_0 + y'(0) \cdot t \\
+                z = z_0 + z'(0) \cdot t \\
+              \end{array}\right.$, иначе $\left\{\begin{array}{l}
+                x - x_0 = x'(0)\cdot t \\
+                y - y_0 = y'(0)\cdot t \\
+                z - z_0 = z'(0)\cdot t \\
+              \end{array}\right.$
+          \end{center}
+          \begin{equation*}
+            \frac{x - x_0}{x'(0)} = \frac{y - y_0}{y'(0)} = \frac{z - z_0}{z'(0)} = t
+          \end{equation*}
+
+    \item $x^2 + y^2 + z^2 = 1$
+
+          Пусть $z_0 > 0$, тогда в окрестности точки $(x_0,y_0,z_0)$ сферу можно параметризовать следующими уравнениями:
+          \begin{equation*}
+            \left\{\begin{array}{l}
+              x = u \\
+              y = v \\
+              z = \sqrt{1 - u^2 - v^2}
+            \end{array}\right.
+          \end{equation*}
+
+          Касательное пространство к сфере в точке $(x_0,y_0,z_0)$:
+          \begin{equation*}
+            \left(\begin{array}{c}
+              x \\
+              y \\
+              z
+            \end{array}\right) = \left(\begin{array}{c}
+              x_0 \\
+              y_0 \\
+              z_0
+            \end{array}\right) + \left(\begin{array}{cc}
+              \frac{\delta x}{\delta u} & \frac{\delta x}{\delta v} \\
+              \frac{\delta y}{\delta u} & \frac{\delta y}{\delta v} \\
+              \frac{\delta z}{\delta u} & \frac{\delta z}{\delta v} \\
+            \end{array}\right) (u_0,v_0) \cdot \left(\begin{array}{c}
+              u \\
+              v
+            \end{array}\right) \implies
+          \end{equation*}
+          \begin{equation*}
+            \left\{\begin{array}{l}
+              x = x_0 + \frac{\delta x}{\delta u}(u_0,v_0) \cdot u + \frac{\delta x}{\delta v}(u_0,v_0)\cdot v \\
+              y = y_0 + \frac{\delta y}{\delta u}(u_0,v_0) \cdot u + \frac{\delta y}{\delta v}(u_0,v_0)\cdot v \\
+              z = z_0 + \frac{\delta z}{\delta u}(u_0,v_0) \cdot u + \frac{\delta z}{\delta v}(u_0,v_0)\cdot v \\
+            \end{array}\right.
+          \end{equation*}
+
+          \begin{equation*}
+            \left\{\begin{array}{l}
+              x = x_0 + u \\
+              y = y_0 + v \\
+              z = z_0 - \frac{u_0}{\sqrt{1 - u_0^2 - v_0^2}}\cdot u - \frac{v_0}{\sqrt{1 - u_0^2 - v_0^2}}\cdot v
+            \end{array}\right.
+          \end{equation*}
+  \end{enumerate}
+\end{example}
+
+\begin{statement}
+  Пусть $S$ -- $k$-мерная поверхность в $\mathbb{R}^n$ задается системой уравнений
+  \begin{center}
+    $\left\{\begin{array}{l}
+        F^1(x^1,\ldots,x^n) = 0 \\
+        \vdots                  \\
+        F^{n-k}(x^1,\ldots,x^n) = 0,
+      \end{array}\right.$, причем $\left|\begin{array}{ccc}
+        \frac{\delta F^1}{\delta x^{k+1}}     & \ldots & \frac{\delta F^1}{\delta x^n}     \\
+        \vdots                                & \ddots & \vdots                            \\
+        \frac{\delta F^{n-1}}{\delta x^{k+1}} & \ldots & \frac{\delta F^{n-1}}{\delta x^n} \\
+      \end{array}\right|(x_0) \ne 0$.
+  \end{center}
+
+  Тогда касательная плоскость к $S$ в точке $x_0$ задается системой уравнений:
+  \begin{equation*}
+    \left\{\begin{array}{l}
+      \frac{\delta F^1}{\delta x^1}(x_0)\cdot (x^1-x^1_0) + \frac{\delta F^1}{\delta x^2}(x_0)(x^2-x_0^2) + \ldots + \frac{\delta F^1}{\delta x^n}(x_0)(x^n - x_0^n) = 0 \\
+      \vdots                                                                                                                                                             \\
+      \frac{\delta F^{n-k}}{\delta x^1}(x_0)\cdot (x^1-x^1_0) + \frac{\delta F^{n-k}}{\delta x^2}(x_0)(x^2-x_0^2) + \ldots + \frac{\delta F^{n-k}}{\delta x^n}(x_0)(x^n - x_0^n) = 0
+    \end{array}\right.
+  \end{equation*}
+  или кратко
+  \begin{equation*}
+    F'(x_0)\cdot(x-x_0) = 0
+  \end{equation*}
+\end{statement}
+
+\begin{proof}
+  Обозначим $(x^1,\ldots,x^k) = u, \ (x^{k+1},\ldots,x^n) = v$
+  \begin{equation*}
+    F = \left(\begin{array}{c}
+      F^1    \\
+      \vdots \\
+      f^{n-k}
+    \end{array}\right)
+  \end{equation*}
+
+  Тогда условия утверждения запишем в виде:
+  \begin{equation*}
+    F(u,v) = 0, \quad |F'_v(u_0,v_0)| \ne 0
+  \end{equation*}
+
+  Тогда по теореме о неявной функции система $\left\{\begin{array}{l}
+      F^1(x^1,\ldots,x^n) = 0 \\
+      \vdots                  \\
+      F^{n-k}(x^1,\ldots,x^n) = 0,
+    \end{array}\right.$ эквивалентна системе
+  \begin{equation*}
+    \left\{\begin{array}{l}
+      u = u \\
+      v = f(u)
+    \end{array}\right.
+  \end{equation*}
+
+  Тогда касательная плоскость задается (роль $t = \left(\begin{array}{c}
+        t^1    \\
+        \vdots \\
+        t^k
+      \end{array}\right)$ играет $u = \left(\begin{array}{c}
+        x^1    \\
+        \vdots \\
+        x^k
+      \end{array}\right)$).
+
+  Тогда систему можно записать в виде:
+  \begin{equation*}
+    \left\{\begin{array}{l}
+      x^1 = t^1                       \\
+      \vdots                          \\
+      x^k = t^k                       \\
+      x^{k + 1} = f^1(t^1,\ldots,t^k) \\
+      \vdots                          \\
+      x^n = f^{n-k}(t^1,\ldots,t^k)
+    \end{array}\right.
+  \end{equation*}
+  \begin{equation*}
+    t_0 = (t_0^k,\ldots,t_0^k) = (x_0^1,\ldots,x_0^k)
+  \end{equation*}
+
+  \begin{equation*}
+    x'(t_0) = \left(\begin{array}{ccc}
+      \frac{\delta x^1}{\delta t^1}     & \ldots & \frac{\delta x^1}{\delta t^k}     \\
+      \vdots                            & \ddots & \vdots                            \\
+      \frac{\delta x^k}{\delta t^1}     & \ldots & \frac{\delta x^k}{\delta t^k}     \\
+      \frac{\delta f^1}{\delta t^1}     & \ldots & \frac{\delta f^1}{\delta t^k}     \\
+      \vdots                            & \ddots & \vdots                            \\
+      \frac{\delta f^{n-k}}{\delta t^1} & \ldots & \frac{\delta f^{n-k}}{\delta t^k}
+    \end{array}\right)(t_0)
+  \end{equation*}
+  \begin{equation*}
+    x = x_0 + x'(t_0)\cdot t
+  \end{equation*}
+  $\left\{\begin{array}{l}
+      x^1 = x_0^1 + 1 \cdot t^1                                                                                         \\
+      \vdots                                                                                                            \\
+      x^k = x_0^k + 1 \cdot t^k                                                                                         \\
+      x^{k+1} = x^{k+1} + \frac{\delta f^1}{\delta t^k}(t_0) \cdot t^1 + \ldots + \frac{\delta f^1}{\delta t^k}(x_0)t^k \\
+      \vdots                                                                                                            \\
+      x^n = x^n + \frac{\delta f^{n-k}}{\delta t^k}(t_0) t^1 + \ldots + \frac{\delta f^{n-k}}{\delta t^k}(x_0)t^k
+    \end{array}\right., \quad \begin{array}{l}
+      u = (x^1,\ldots,x^k)     \\
+      v = (x^{k+1},\ldots,x^n) \\
+      \left\{\begin{array}{l}
+               u = u \\
+               v = f(u)
+             \end{array}\right.
+    \end{array}$ \\
+
+  \begin{equation*}
+    f'(u_0) = -[F_x'(u_0,v_0)]^{-1} \cdot F_u' (u_0,v_0)
+  \end{equation*}
+
+  $\left\{\begin{array}{l}
+      x^1 - x_0^1 = t^1                                                                                                                                 \\
+      \vdots                                                                                                                                            \\
+      x^k - x_0^k = t^k                                                                                                                                 \\
+      x^{k+1} - x^{k+1}_0 = \frac{\delta f^1}{\delta t^k}(t_0) \cdot (x^1 - x_0^1) + \ldots + \frac{\delta f^1}{\delta t^k}(x_0)\cdot (x^k - x_0^k)     \\
+      \vdots                                                                                                                                            \\
+      x^{n} - x^{n}_0 = \frac{\delta f^{n-k}}{\delta t^k}(t_0) \cdot (x^1 - x_0^1) + \ldots + \frac{\delta f^{n-k}}{\delta t^k}(x_0)\cdot (x^k - x_0^k) \\
+    \end{array}\right.$ \\
+
+  $\left\{\begin{array}{l}
+      u - u_0 = u - u_0 \\
+      v - v_0 = f'(u_0) \cdot (u - u_0)
+    \end{array}\right. \implies \left\{\begin{array}{l}
+      u - u_0 = u - u_0 \\
+      v - v_0 = -[F_v'(u_0,v_0)]^{-1} \cdot F_u'(u_0,v_0)
+    \end{array}\right. \implies [F_v'(u_0,v_0)](v-v_0) + F_u'(u_0,v_0)\cdot (u - u_0) = 0$
+\end{proof}
+
+Итак, мы вывели, что если поверхность задана линейным уравнением $\left\{\begin{array}{l}
+    F'(x^1,\ldots,x^n) = 0 \\
+    \vdots                 \\
+    F^{n-k}(x^1,\ldots,x^n) = 0
+  \end{array}\right.$ или $P(x) = 0, \ F = \left(\begin{array}{c}
+      F'(x)  \\
+      \vdots \\
+      F^{n-k}(x)
+    \end{array}\right), \ x = (x^1,\ldots,x^n), \ x_0 = (x_0^1,\ldots,x_0^n)$.
+
+Тогда уравнение касательной плоскости кратко записывается:
+\begin{equation*}
+  F_x'(x_0)\cdot(x-x_0) = 0
+\end{equation*}
+
+Обозначим $x - x_0 = \xi$, то есть:
+\begin{equation*}
+  \xi = \left(\begin{array}{c}
+    \xi^1  \\
+    \vdots \\
+    \xi^n
+  \end{array}\right) = \left(\begin{array}{c}
+    x'-x_0' \\
+    \vdots  \\
+    x^n-x_0^n
+  \end{array}\right)
+\end{equation*}
+
+Таким образом получаем, что уравнение касательной пространства имеет вид:
+\begin{equation*}
+  F_x'(x_0)\cdot \xi = 0
+\end{equation*}
+
+Таким образом касательнаое пространство к поверхности заданной уравнением $F(x) = 0$ в точке $x_0$ состоит из векторов $\xi$, удовлетворяет уравнению
+\begin{equation}
+  F_x'(x_0)\cdot \xi = 0
+\end{equation}
+
+\begin{theorem}[О структуре касательных пространства]
+  Пусть $S$ -- $k$-мерная поверхность в $\mathbb{R}^n, \ x_0 \in S$. Тогда касательное пространство $TS_{x_0}$ в точке $x_0$ состоит из направляющих векторов касательных к гладким кривым на поверхности $S$, проходящих через точку $x_0$.
+\end{theorem}
+
+\begin{proof}
+  Пусть $x = x(t)$ -- гладкая кривая в $\mathbb{R}^n$, то есть \\
+  $\left\{\begin{array}{l}
+      x' = x'(t) \\
+      \vdots     \\
+      x^n = x^n(t)
+    \end{array}\right., \ t \in \mathbb{R}, \ x_0 = x(t_0)$
+
+  Касательный вектор в точке $x_0$ к кривой имеет вид
+  \begin{equation*}
+    \left(\begin{array}{c}
+      \frac{dx'}{dt}(t_0) \\
+      \vdots              \\
+      \frac{dx^n}{dt}(t_0)
+    \end{array}\right) = \left(\begin{array}{c}
+      x^{1'}(t_0) \\
+      \vdots      \\
+      x^{1n}(t_0)
+    \end{array}\right)
+  \end{equation*}
+  \begin{enumerate}
+    \item Пусть $S$ -- $k$-мерная поверхность, задана системой уравнений $F(x) = 0$ и пусть $x = x(t)$ -- гладкая кривая на $S$. Покажем, что вектор $x'(t_0) = \left(\begin{array}{c}
+                \frac{dx'}{dt}(t_0) \\
+                \vdots              \\
+                \frac{dx^n}{dt}(t_0)
+              \end{array}\right), \ x'(t_0) \in TS_{x_0}, \ x_0 = x(t_0)$, то есть покажем, что $x'(t_0)$ удовлетворяет уравнению $F_x'(x_0)\cdot \xi=0$.
+
+          Так как кривая $x = x(t)$ лежит на $S$, то $F(x(t)) = 0$ -- верно. Продифференцируем $F(x(t)) = 0$ по $t$ в точке $x_0$:
+          \begin{equation*}
+            F_x'(x_0) \cdot x'(t_0) = 0
+          \end{equation*}
+          -- это и есть уравнение касательного пространства, то есть $x'(t_0)$ удовлетворяет уравнению касательной кривой $F_x'(x_0)\cdot \xi = 0$.
+
+    \item Пусть $\xi = (\xi^1,\xi^2,\ldots,\xi^n) \in TS_{x_0}$, то есть $\xi$ удовлетворяет уравнению $F_x'(x_0)\cdot \xi = 0$
+  \end{enumerate}
+
+  Покажем, что $\exists$ гладкая кривая $l$ на поверхности $S$:
+  \begin{enumerate}
+    \item $x_0 \in l$
+    \item $\xi$ ялвяется направляющим вектором касательной к $l$ в точке $x_0$
+  \end{enumerate}
+
+  Поверхность $S$ задана системой уравнений:
+  \begin{equation}
+    \left\{\begin{array}{l}
+      F^1(x) = 0 \\
+      \vdots     \\
+      F^{n-k}(x) = 0
+    \end{array}\right.
+  \end{equation}
+
+  Пусть
+  \begin{equation*}
+    \left|\begin{array}{ccc}
+      \frac{\delta F'}{\delta x^{k+1}}      & \cdots & \frac{\delta F'}{\delta x^n}      \\
+      \vdots                                & \ddots & \vdots                            \\
+      \frac{\delta F^{n-k}}{\delta x^{k+1}} & \cdots & \frac{\delta F^{n-k}}{\delta x^n}
+    \end{array}\right| (x_0) \ne 0
+  \end{equation*}
+
+  По теореме о неявной функции, система $(1.4)$ эквивалентна системе
+  \begin{equation}
+    \left\{\begin{array}{l}
+      x^{k+1} = f^1(x^1,\ldots,x^k) \\
+      \vdots                        \\
+      x^n = f^{n-k}(x^1,\ldots,x^k)
+    \end{array}\right\}
+  \end{equation}
+
+  Обозначим $u = (x',\ldots,x^k), \ v = (x^{k+1},\ldots,x^n)$, тогда $(1.3)$ имеет вид
+  \begin{equation*}
+    v = f(u)
+  \end{equation*}
+
+  Тогда по утверждению касательное пространство задается уравнениями:
+  \begin{equation}
+    \left\{\begin{array}{l}
+      x^{k+1} = x_0^{k + 1} + \frac{\delta f'}{\delta x'}(x_0)(x'-x_0') + \ldots + \frac{\delta f^1}{\delta x^k}(x_0)(x^k - x_0^k) \\
+      \vdots                                                                                                                       \\
+      x^n = x_0^n + \frac{\delta f^{n-k}}{\delta x^1}(x_0)(x' - x_0') + \ldots + \frac{\delta f^{n-k}}{\delta x^k}(x_0)(x^k - x_0^k)
+    \end{array}\right.
+  \end{equation}
+
+  Пусть
+  \begin{equation*}
+    \eta = \left(\begin{array}{c}
+      \eta'      \\
+      \vdots     \\
+      \eta^k     \\
+      \eta^{k+1} \\
+      \vdots     \\
+      \eta^n
+    \end{array}\right) = \left(\begin{array}{c}
+      x^1 - x_0^1         \\
+      \vdots              \\
+      x^k - x_0^k         \\
+      x^{k+1} - x^{k+1}_0 \\
+      \vdots              \\
+      x^n - x_0^n
+    \end{array}\right)
+  \end{equation*}
+
+  Тогда система $(1.4)$ примет вид
+  \begin{equation}
+    \left\{\begin{array}{l}
+      \eta^{k+1} = \frac{\delta f'}{\delta x'}(x_0) \cdot \eta' + \ldots + \frac{\delta f'}{\delta x^k}(x_0)\cdot \eta^k \\
+      \vdots                                                                                                             \\
+      \eta^{n} = \frac{\delta f^{n-k}}{\delta x'}(x_0) \cdot \eta' + \ldots + \frac{\delta f^{n-k}}{\delta x^k}(x_0)\cdot \eta^k
+    \end{array}\right.
+  \end{equation}
+
+  Таким образом, если вектор $\xi \in TS_{x_0}$, то он полностью определяется своими первыми $k$ координатами, а остальные можно волучить с помощью системы $(1.5)$.
+
+  Построим кривую в $\mathbb{R}^n$, то есть зададим ее уравнением $x = x(t)$:
+  \begin{equation}
+    l: \ \left\{\begin{array}{l}
+      x' = x_0' + \xi't                                     \\
+      \vdots                                                \\
+      x^k = x_0^k + \xi^k t                                 \\
+      x^{k+1} = f^1(x_0' + \xi' t, \ldots, x_0^k + \xi^k t) \\
+      \vdots                                                \\
+      x^{n} = f^{n-k}(x_0' + \xi' t, \ldots, x_0^k + \xi^k t)
+    \end{array}\right., \ v = f(u)
+  \end{equation}
+
+  Пусть точка $x_0$ соотуетствует параметру $t = 0$
+  \begin{equation*}
+    x(0) = \left\{\begin{array}{l}
+      x' = x_0'                        \\
+      \vdots                           \\
+      x^k = x_0^k                      \\
+      x^{k+1} = f^1(x_0',\ldots,x_0^k) \\
+      \vdots                           \\
+      x^n = f^{n-k}(x_0', \ldots, x_0^k)
+    \end{array}\right.,
+  \end{equation*}
+  то есть кривая проходит через точку $x_0$.
+
+  Далее, функция $f$ удовлетворяет условию $v = f(u) \iff F(u,v) = 0$. Тогда $F(u,f(u)) = 0\implies l$, заданная система $(1.6), \ l \subset S$.
+
+  Таким образом построили гладкий путь, лежащий на поверхности $S$, проходящий через точку $x_0 \in S$, вектор $x'(t_0)$ -- его касательный вектор $\in TS_{x_0}$
+\end{proof}
+
+\section{Условный экстремум функции многих переменных}
+
+\textbf{Задача.} Дана функция $u = f(x^1,\ldots,x^n)$ и дана поверхность, заданная уравнениями:
+\begin{equation}
+  \left\{\begin{array}{l}
+    F^1(x^1,\ldots,x^n) = 0 \\
+    \vdots                  \\
+    F^k(x^1,\ldots,x^n) = 0
+  \end{array}\right.
+\end{equation}
+
+Нужно найти точку $x_0 = (x_0^1,\ldots,x_0^n)$, в которой
+\begin{equation*}
+  f(x_0^1,\ldots,x_0^n) = \underset{(\min)}{\max}f(x^1,\ldots,x^n),
+\end{equation*}
+где $\max \ (\min)$ берется по всем точкам $(x_0^1,\ldots,x_0^n)$, удовлетворяющих уравнениям $(1.7)$.
+
+\begin{center}
+  {\large Геометрическая формулировка.}
+\end{center}
+
+\textbf{Задача.} Пусть система $(1.7)$ задает в пространстве $\mathbb{R}^n \ m$-мерную поверхность $S$. Найти точку $x_0 \in S:$
+\begin{equation*}
+  \exists \ U_x(x_0) = U(x_0)\cap S: \quad \forall x \in U_s(x_0)
+\end{equation*}
+\begin{center}
+  $\underset{x_0 - \max}{f(x) \leqslant f(x_0)}$ (или $\underset{x_0 - \min}{f(x) \geqslant f(x_0)}$)
+\end{center}
+
+\begin{definition}[линия уровня ($c$-уровень)]
+  Пусть $f:D\rightarrow\mathbb{R}, \ D \subset \mathbb{R}^n$ -- область. \textbf{Линией уровня ($c$-уровнем)} функции $f$ называется множество
+  \begin{equation*}
+    N_c = \{x\in D \ \big| \ f(x) = c\}
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}[необходимое условие условного локального экстремума]
+  Пусть система уровнений
+  \begin{equation}
+    \left\{\begin{array}{l}
+      F^1(x^1,\ldots,x^n) = 0 \\
+      \vdots                  \\
+      F^{n-k}(x^1,\ldots,x^n) = 0
+    \end{array}\right.
+  \end{equation}
+  задает $(n-k)$-мерную гладкую поверхность $S$ в $D \subset \mathbb{R}^n, \ D$ -- область. Функция $f:D\rightarrow\mathbb{R}$ -- гладкая. Если $x_0 \in S$ является точкой условного локального экстремума для функции $f$, то существует такой набор чисел $\lambda_1,\lambda_2,\ldots,\lambda_{n-k} \in \mathbb{R}:$
+  \begin{equation*}
+    grad f(x_0) = \sum_{i = 1}^{k}\lambda_i \cdot grad F^i(x_0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}[Доказательство теоремы]
+  \begin{lemma}
+    Если $x_0$ -- точка условного локального экстремума для функции $f$ и $x_0$ не является критической для функции $f$ (то есть $df(x_0)\ne0$), то касательное пространство $TS_{x_0}\subset TN_{x_0}$, где
+    \begin{equation*}
+      N_{x_0} = \{x \in D \ \big| \ f(x) = f(x_0)\}
+    \end{equation*} -- поверхность уровня, проходящая через $x_0$.
+  \end{lemma}
+
+  \begin{proof}[Доказательство леммы]
+    Пусть $\xi \in TS_{x_0}$. Пусть $x = x(t)$ -- гладкая кривая на $S: \ x(0) = x_0, \ x'(0) = \xi$.
+
+    Так как точка $x_0$ -- условный экстремум, для функции $f$, то точка $t = 0$ есть локальный экстремум для функции $f(x(t)) \underset{th. \ Fermat's}{\implies}$
+    \begin{equation}
+      [f(x(t))]_t'(0) = 0 \iff
+      f_x'(x_0) \cdot x_t'(0) = 0
+    \end{equation}
+
+    Касательное пространство к $N_{x_0}$ в точке $x_0$ имеет уравнение:
+    \begin{equation}
+      f_x'(x_0)\cdot \xi = 0
+    \end{equation}
+
+    Заметим, что $(1.9)$ и $(1.10)$ -- одно и то же уравнение, то есть
+    \begin{equation*}
+      x_t'(0) = \xi \implies x_t'(0) \in TN_{x_0}
+    \end{equation*}
+  \end{proof}
+
+  Касательное пространство $TS_{x_0}$ задается уравнениями
+  \begin{equation}
+    \left\{\begin{array}{l}
+      \frac{\delta F^1}{\delta x^1}(x_0)\cdot \xi^1 + \ldots + \frac{\delta F^1}{\delta x^n}(x_0) \cdot \xi^n = 0 \\
+      \vdots                                                                                                      \\
+      \frac{\delta F^{n-k}}{\delta x^1}(x_0)\cdot \xi^1 + \ldots + \frac{\delta F^{n-k}}{\delta x^n}(x_0) \cdot \xi^n = 0
+    \end{array}\right.,
+  \end{equation}
+  но $\forall i = \overline{1,n-k}:$
+  \begin{equation*}
+    \bigg\{\frac{\delta F^i}{\delta x^1}\cdot (x_0);\ldots;\frac{\delta F^i}{\delta x^n}\bigg\} = grad F^i(x_0)
+  \end{equation*}
+
+  Перепишем $(1.11)$ в виде:
+  \begin{equation}
+    \left\{\begin{array}{l}
+      (grad F^1(x_0),\xi) = 0 \\
+      \vdots                  \\
+      (grad F^{n-k}(x_0,),\xi) = 0
+    \end{array}\right.
+  \end{equation}
+
+  Касательное пространство $TN_{x_0}$ к $N_{x_0} = \{x \in D \ \big| \ f(x) = f(x_0)\}$ задается уравнением: $f'(x_0)\cdot\xi = 0$. Заметим, что $f'(x_0) = grad f(x_0) = \\ \big\{\frac{\delta f(x_0)}{\delta x^1},\ldots,\frac{\delta f(x_0)}{\delta x^n}\big\} \implies f'(x_0)\cdot \xi = 0 \iff$
+  \begin{equation}
+    \iff (frad f(x_0),\xi) = 0
+  \end{equation}
+
+  Таким образом из леммы следует, что $\forall \xi$ удовлетворяет системе уравнений $(1.12)$, так же удовлетворяет уравнению $(1.13)$, то есть из того, что $\forall i \in \overline{1,n-k} \ \xi \perp grad F^i(x_0) \implies \xi \perp frad f(x_0) \implies \exists \lambda_1,\ldots,\lambda_{n-k} \in \mathbb{R}:$
+  \begin{equation*}
+    frad f(x_0) = \sum_{i = 1}^{n-k} \lambda_i\cdot grad F^i(x_0)
+  \end{equation*}
+\end{proof}
+
+\section*{Метод Лагранжа}
+
+Пусть требуется найти условный экстремум функции $f:D\rightarrow\mathbb{R}, \ D$ -- область в $\mathbb{R}^n$, на поверхности $S$, заданной системой уравнений
+\begin{equation*}
+  \left\{\begin{array}{l}
+    F^1(x^1,\ldots,x^n) = 0 \\
+    \vdots                  \\
+    F^k(x^1,\ldots,x^n) = 0
+  \end{array}\right.
+\end{equation*}
+
+Составим функцию Лагранжа:
+\begin{multline*}
+  L(x,\lambda) = L(x^1,\ldots,x^n,\lambda^1,\ldots,\lambda^k) = \\
+  = f(x^1,\ldots,x^n) + \sum_{i=1}^{k}\lambda^i\cdots F^i(x^1,\ldots,x^n),
+\end{multline*}
+
+$\lambda = (\lambda^1,\ldots,\lambda^k), \ \lambda^i \in \mathbb{R}$ -- коэффициент, в общем случае пока неизвестен.
+
+Необходимое условие локального экстремума для функции $L:$
+\begin{equation}
+  \left\{\begin{array}{l}
+    \frac{\delta L}{\delta x^1} = \frac{\delta f}{\delta x^1} + \sum_{i = 1}^{k}\lambda^i\cdot\frac{\delta F^i}{\delta x^1} = 0 \\
+    \vdots                                                                                                                      \\
+    \frac{\delta L}{\delta x^n} = \frac{\delta f}{\delta x^n} + \sum_{i = 1}^{k}\lambda^i\cdot\frac{\delta F^i}{\delta x^n} = 0 \\
+    \frac{\delta L}{\delta \lambda^1} = F^1(x^1,\ldots,x^n) = 0                                                                 \\
+    \vdots                                                                                                                      \\
+    \frac{\delta L}{\delta \lambda^k} = F^k(x^1,\ldots,x^n) = 0
+  \end{array}\right.
+\end{equation}
+
+\begin{definition}[условный экстремум]
+  Пусть $f:D\rightarrow\mathbb{R}, \ D \subset \mathbb{R}^n$ -- область, $S$ -- поверхность в $D$, \textbf{условным экстремумом} функции $f$ называется экстремум функции $f\big|_S$.
+\end{definition}
+
+\section*{Достаточное условие условного локального экстремума}
+
+Пусть $f:D\rightarrow\mathbb{R}, \ D \subset \mathbb{R}^n$ -- область, $f \in C^{(2)} \ (D,\mathbb{R}), \ S$ -- $(n-k)$-мерная поверхность в $D$, заданная системой уравнений
+\begin{equation*}
+  \left\{\begin{array}{l}
+    F^1(x^1,\ldots,x^n) = 0 \\
+    \vdots                  \\
+    F^k(x^1,\ldots,x^n) = 0
+  \end{array}\right..
+\end{equation*}
+
+Функция Лагранжа
+\begin{equation*}
+  L(x,\lambda) = f(x^1,\ldots,x^n) + \sum_{i = 0}^{k}\lambda_i \cdot F^i(x^1,\ldots,x^n).
+\end{equation*}
+
+Здесь $\lambda_1,\ldots,\lambda_k$ выбираются таким образом, чтобы было выполнено необходимое условие условного экстремума в точке $x_0$.
+
+\begin{theorem}[достаточное условие условного экстремума]
+  Если при введенных выше условиях квадратичная форма
+  \begin{equation*}
+    Q(\xi) = \sum_{i,j=1}^{n}\frac{\delta^2 L}{\delta x^i \delta x^j}(x_0)\cdot\xi^i\cdot\xi^j,
+  \end{equation*}
+  \begin{equation*}
+    (\xi=(\xi^1,\ldots,\xi^n))
+  \end{equation*}
+
+  Если:
+  \begin{enumerate}
+    \item Определена на $TS_{x_0}$
+          \begin{enumerate}
+            \item Если $Q$ знакоположительная, то точка $x_0$ -- точка условного локального $\min$
+            \item Если $Q$ знакоотрицательная, то точка $x_0$ -- точка условного локального $\max$
+          \end{enumerate}
+    \item Если $Q$ может принимать значения разных знаков, то в точке $x_0$ условного экстремума не наблюдается
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Заметим, что $f\big|_S$ и $L\big|_S$ совпадают. В самом деле, если $x\in S$, то
+  \begin{equation*}
+    L(x,\lambda) = f(x) + \frac{1}{2}\cdot\sum_{i=1}^{k}\lambda_i\cdot F^i(x) = f(x).
+  \end{equation*}
+
+  Поэтому покажем, что условие знакопостоянства $Q$ является достаточным для экстремума функции $L\big|_s$.
+
+  Имеем, что
+  \begin{equation*}
+    \left\{\begin{array}{l}
+      \frac{\delta L}{\delta x^1}(x_0) = 0 \\
+      \vdots                               \\
+      \frac{\delta L}{\delta x^n}(x_0) = 0
+    \end{array}\right.
+  \end{equation*}
+
+  По формуле Тейлора:
+  \begin{equation}
+    L\big|_S(x) - L(x_0) = \sum_{i,j=1}^{n}\frac{\delta^2 L(x_0)}{\delta x^i \delta x^j}(x^i - x_0^i)\cdot (x^j - x_0^j) + o(||x-x_0||^2)
+  \end{equation}
+
+  Так как $S$ -- $m$-мерная ($m=n-k$) поверхность, то существует гладкое отображение $x(t):\mathbb{R}^m\rightarrow\mathbb{R}^n: \ x = x(t) \subset S \ \forall t \in \mathbb{R}^m, \ x(0) = x_0$. Отображение $x(t)$ биективно отображает $\mathbb{R^m}$ на $U_S(x_0) = U(x_0)\cap S$.
+
+  Если $x\in S$, то условие дифференцируемости $x(t)$:
+  \begin{equation*}
+    x-x_0 = x(t) - x(0) = x'(0)\cdot t + o(||t||)
+  \end{equation*}
+  \begin{center}
+    или
+  \end{center}
+  \begin{equation*}
+    \left\{\begin{array}{l}
+      x^1 - x^1_0 = \frac{\delta x^1}{\delta t^1}(0)\cdot t^1 + \ldots + \frac{\delta x^1}{\delta t^m}(0)\cdot t^m + d(||t||) \\
+      \vdots                                                                                                                  \\
+      x^n - x^n_0 = \frac{\delta x^n}{\delta t^1}(0)\cdot t^1 + \ldots + \frac{\delta x^n}{\delta t^m}(0)\cdot t^m + d(||t||) \\
+    \end{array}\right.
+  \end{equation*}
+  \begin{center}
+    или кратко
+  \end{center}
+  \begin{equation}
+    \left\{\begin{array}{l}
+      x^1 - x^1_0 = \sum_{i=1}^{m}\frac{\delta x^1}{\delta t^i}(0)\cdot t^i + o(||t||) \\
+      \vdots                                                                           \\
+      x^n - x^n_0 = \sum_{i=1}^{m}\frac{\delta x^n}{\delta t^i}(0)\cdot t^i + o(||t||) \\
+    \end{array}\right.
+  \end{equation}
+
+  Подставим $(1.16)$ в $(1.15)$:
+  \begin{multline*}
+    L\big|_S(x) - L(x_0) = \frac{1}{2}\cdot\sum_{i,j=1}^{n}\frac{\delta^2L(x_0)}{\delta x^i \delta x^j} \cdot(\sum_{\alpha=1}^{m}\frac{\delta x^i}{\delta t^\alpha}(0)\cdot t^\alpha + o(||t||))\cdot \\
+    \cdot(\sum_{\beta=1}^{m}\frac{\delta x^j}{\delta t^\beta}(0)\cdot t^\beta + o(||t||)) + o(||x-x_0||^2) \overset{(*)}{=} \\
+    = \frac{1}{2}\sum_{i,j=1}^{n}\frac{\delta^2 L(x_0)}{\delta x^i \delta x^j}\cdot\big[(\sum_{\alpha=1}^{m}\frac{\delta x^i}{\delta t^\alpha}(0)\cdot t^\alpha)\cdot(\sum_{\beta=1}^{m}\frac{\delta x^i}{\delta t^\beta}(0)\cdot t^\beta) + \\
+      + (\sum_{\alpha=1}^{m}\frac{\delta x^i}{\delta t^\alpha}(0)t^\alpha)\cdot o(||t||) + (\sum_{\beta=1}^{m}\frac{\delta x^i}{\delta t^\beta}(0)\cdot t^\beta)\cdot \\
+      \cdot o(||t||) + o(||t||)\big] + o(||x-x_0||^2) = \frac{1}{2}\sum_{i,j=1}^{n}\frac{\delta^2 L(x_0)}{\delta x^i \delta x^j} \cdot \\
+    \cdot \sum_{\alpha,\beta = 1}^{m}\frac{\delta x^i}{\delta t^\alpha} \cdot \frac{x^i}{\delta t^\beta} \cdot t^\alpha \cdot t^\beta + o(||t||^2) = \frac{||t||^2}{2} \cdot \sum_{i,j=1}^{n}\frac{\delta^2 L(x_0)}{\delta x^i\delta x^j} \cdot \\
+    \cdot \sum_{\alpha,\beta=1}^{m}\frac{\delta x^i}{\delta t^\alpha}\cdot \frac{\delta x^j}{\delta t^\beta} \cdot \frac{t^\alpha}{||t||} \cdot \frac{t^\beta}{||t||} + o(||t||^2) = \frac{||t||^2}{2}Q(\xi) + o(||t||^2).
+  \end{multline*}
+
+  Таким образом получаем, что
+  \begin{equation*}
+    L\big|_S(x) - L(x_0) = \frac{||t||^2}{2} \cdot Q(\xi) + o(||t||^2), \ \xi \in TS_{x_0}.
+  \end{equation*}
+
+  Тогда, если $Q> 0$, то
+  \begin{equation*}
+    L\big|_S(x) - L(x_0)> 0 \implies x_0 \ \min \ L\big|_S(x) \implies x_0 \ \min \ f\big|_S.
+  \end{equation*}
+
+  Если $Q < 0$, то
+  \begin{equation*}
+    L\big|_S(x) - L(x_0) < 0 \implies x_0 \ \max \ L\big|_S(x) \implies x_0 \ \max \ f\big|_S \ (\forall x \in U_S(x_0))
+  \end{equation*}
+
+  Если $Q$ -- знакопеременна, то $x(t)$ не для всех $x \in U_S(x_0)$ разность $L\big|_S(x) - L(x_0)$ имеет постоянный знак $\implies$ в этом случае в точке $x_0$ нет экстремума.
+
+  Докажем $(*)$, то есть покажем, что
+  \begin{equation*}
+    o(||t||) \cdot \sum_{\alpha = 1}^{m} \frac{\delta x^i}{\delta t^\alpha}\cdot t^\alpha = o(||t||^2)
+  \end{equation*}
+  \begin{center}
+    и
+  \end{center}
+  \begin{equation*}
+    o(||x-x_0||^2) = o(||t||^2), \ x \in S.
+  \end{equation*}
+
+  В самом деле,
+  \begin{equation*}
+    \bigg| \sum_{\alpha=1}^{m}\frac{\delta x^i}{\delta t^\alpha}(0)\cdot t^\alpha\bigg| \leqslant \sum_{\alpha=1}^{m}\bigg|\frac{\delta x^i}{\delta t^\alpha}(0)\bigg| \cdot \big|t^\alpha \big| \leqslant ||t|| \cdot \sum_{\alpha = 1}^{m} \bigg|\frac{\delta x^i}{\delta t^\alpha}(0)\bigg| = A\cdot ||t||
+  \end{equation*}
+
+  Таким образом,
+  \begin{equation*}
+    o(||t||) \cdot \bigg|\sum_{\alpha = 1}^{m}\frac{\delta x^i(0)}{\delta t^\alpha}\cdot t^\alpha \bigg| \leqslant o(||t||)\cdot O(||t||) = \omega(t)\cdot ||t|| \cdot \gamma(t) \cdot ||t|| =
+  \end{equation*}
+  \begin{center}
+    $= \bigg|$ где $\omega(t)\rightarrow0$ при $t\rightarrow 0$, $\gamma(t)$ -- ограниченная функция $\bigg| =$
+  \end{center}
+  \begin{equation*}
+    = \alpha(t) \cdot ||t||^2 = o(||t||^2), \ \alpha(t)\rightarrow 0, \ t\rightarrow 0
+  \end{equation*}
+
+  Далее, если $x\in S$, то
+  \begin{multline*}
+    ||x-x_0||^2 = \left|\left|\left(\begin{array}{c}
+        x^1 - x_0^1 \\
+        \vdots      \\
+        x^n - x^n_0
+      \end{array}\right)\right|\right|^2 \overset{(1.16)}{=} \left|\left|\left(\begin{array}{c}
+        \sum_{\alpha=1}^{m}\frac{\delta x^1}{\delta t^\alpha}\cdot t^\alpha + \ldots \\
+        \vdots                                                                       \\
+        \sum_{\alpha=1}^{m}\frac{\delta x^n}{\delta t^\alpha}\cdot t^\alpha + \ldots
+      \end{array}\right)\right|\right|^2 = \\
+    = \bigg(\sum_{\alpha = 1}^{m}\frac{\delta x^1}{\delta t^\alpha}\cdot t^\alpha + o(||t||)\bigg)^2 + \ldots + \bigg(\sum_{\alpha=1}^{m}\frac{\delta x^n}{\delta t^\alpha} + o(||t||)\bigg)^2 =\\
+    = \bigg(\sum_{\alpha = 1}^{m}\frac{\delta x^1}{\delta t^\alpha}\cdot t^\alpha \bigg)^2 + \ldots + \bigg(\sum_{\alpha=1}^{m}\frac{\delta x^n}{\delta t^\alpha} \bigg)^2 + o(||t||^2) \leqslant \\
+    \leqslant \bigg( \underset{\alpha}{\max}\frac{\delta x^1}{\delta t^\alpha}\bigg)^2 \cdot \bigg( \frac{\alpha=1}{m}t^\alpha\bigg)^2 + \ldots + \bigg(\underset{\alpha}{\max}(\frac{\delta x^n}{\delta t^\alpha}) \bigg)^2\cdot(\sum_{\alpha=1}^{n}t^\alpha)^2 \leqslant \\
+    \leqslant ||t||^2 \cdot
+  \end{multline*}
+
+  ДОПИСАТЬ
+\end{proof}
+
+\chapter{Теория рядов}
+
+\section{Числовые ряды}
+
+\begin{definition}[ряд, член ряда, $n$-мерный член ряда, частичная сумма]
+  \textbf{Рядом} называется выражение
+  \begin{equation*}
+    a_1 + a_2 + \ldots + a_n + \ldots,
+  \end{equation*}
+  где $a_i \in \mathbb{R}$.
+
+  Числа $a_i$ называются \textbf{членами ряда}, $a_n$ -- \textbf{$n$-мерным членом ряда}.
+  \begin{equation}
+    \sum_{n=1}^{\infty}a_n
+  \end{equation}
+
+  Рассмотрим числа: $\quad \begin{array}{l}
+      A_1 = a_1       \\
+      A_2 = a_1 + a_2 \\
+      \vdots          \\
+      A_n = a_1 + a_2 + \ldots + a_n
+    \end{array}$
+
+  Числа $A_1,A_2,\ldots,A_n$ называются \textbf{частичными суммами} ряда $(2.1)$
+\end{definition}
+
+\begin{definition}
+  Говорят, что ряд $(2.1)$ сходится, если существует конечный предел частичных сумм, то есть
+  \begin{equation*}
+    \exists \underset{n\rightarrow\infty}{\lim}A_n = A.
+  \end{equation*}
+
+  Тогда сумма бесконечного ряда $(2.1)$ полагается равной
+  \begin{equation*}
+    A = \sum_{n=1}^{\infty}a_n.
+  \end{equation*}
+\end{definition}
+
+\begin{example}
+  \item \begin{equation*}
+    10 + 1 + \frac{1}{10} + \frac{1}{10^2} + \ldots + \frac{1}{10^n} + \ldots = 10 + \sum_{k=0}^{\infty}\frac{1}{10^k}
+  \end{equation*}
+  \begin{multline*}
+    A_n = \frac{1}{10^0} + \frac{1}{10^1} + \ldots + \frac{1}{10^n} = \frac{1\cdot(q^k - 1)}{q - 1} = \\
+    = \frac{\frac{1}{10^n} - 1}{\frac{1}{10} - 1} = \frac{1 - \frac{1}{10^n}}{\frac{9}{10}} = \frac{10}{9} \cdot (1 - \frac{1}{10^n})
+  \end{multline*}
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}A_n = \underset{n\rightarrow\infty}{\lim}\frac{10}{9}(1-\frac{1}{10^n}) = \frac{10}{9}
+  \end{equation*}
+\end{example}
+
+\subsection{Гармонический ряд}
+
+\begin{definition}[среднее гармоническое]
+  Число $C$ называется \textbf{средним гармоническим} чисел $a$ и $b$ ($a,b \ne 0$), если
+  \begin{equation*}
+    \frac{1}{c} = \frac{1}{2}\cdot (\frac{1}{a} + \frac{1}{b})
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Ряд вида
+  \begin{equation}
+    \sum_{n=1}^{\infty}\frac{1}{n}
+  \end{equation}
+  называется \textbf{гармоническим}.
+
+  Покажем, что $(2.2)$ расходится.
+
+  В самом деле,
+  \begin{equation*}
+    \underbrace{1}_{>\frac{1}{2}} + \underbrace{\frac{1}{2}}_{\geqslant \frac{1}{2}} + \underbrace{\frac{1}{3} + \frac{1}{4}}_{> \frac{1}{2}} + \underbrace{\frac{1}{5} + \frac{1}{6} + \frac{1}{7}}_{> \frac{1}{2}} + \underbrace{\frac{1}{8} + \frac{1}{9} + \frac{1}{10} + \frac{1}{11} + \frac{1}{12}}_{> \frac{1}{2}} + \ldots
+  \end{equation*}
+  \begin{eqnarray*}
+    A_n = 1 + \frac{1}{2} + \frac{1}{3} + &\ldots& + \frac{1}{n} \\
+    \forall E &>& 0 \ \exists N : \ \forall n > N \quad |A_n| > E
+  \end{eqnarray*}
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}A_n = \infty
+  \end{equation*}
+\end{definition}
+
+\subsection{Основные свойства сходящихся рядов}
+
+\begin{theorem}[критерий Коши]
+  Ряд $(2.1)$
+  \begin{equation*}
+    \sum_{n=1}^{\infty}a_n
+  \end{equation*}
+  сходится тогда и только тогда, когда $\forall \epsilon > 0 \ \exists N \in \mathbb{N}: \ \forall n > N, \ \forall p > 0$
+  \begin{equation*}
+    |a_{n+1} + \ldots + a_{n+p}| < \epsilon
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Ряд $\sum_{n=1}^{\infty}$ сходится $\underset{by \ def.}{\iff} \exists \underset{n\rightarrow}{\lim}A_n \iff A_n$ -- фундаментальная последовательность: $\forall \epsilon > 0 \ \exists N \in \mathbb{N}: \ \forall n > N$ и $\forall p > 0$
+  \begin{equation*}
+    |A_n - A_{n+p}| < \epsilon
+  \end{equation*}
+  \begin{center}
+    (критерий Коши сходимости последовательности)
+  \end{center}
+  Имеем
+  \begin{multline*}
+    |A_n - A_{n+p}| = \\
+    =|a_1 + a_2 + \ldots + a_n - (a_1 + a_2 + \ldots + a_n + \ldots + a_{n+p})| = \\
+    = |a_{n+1} + \ldots + a_{n+p}| < \epsilon.
+  \end{multline*}
+\end{proof}
+
+\begin{example}
+  Докажем, что ряд $(2.2)$ расходится.
+
+  Если $\exists\epsilon > 0 \ \forall N \ \exists n > N \ \exists p > 0$
+  \begin{equation*}
+    |a_{n+1} + \ldots + a_{n+p}| \geqslant \epsilon
+  \end{equation*}
+  \begin{multline*}
+    |\frac{1}{n+1} + \frac{1}{n+2} + \ldots + \frac{1}{n+p}| \geqslant |\frac{1}{n+p} + \frac{1}{n+p} + \ldots + \frac{1}{n+p}| = \\
+    = \frac{p}{n+p} = \left| n = p \right| = \frac{1}{2},
+  \end{multline*}
+  то есть для $\forall N: \ \epsilon = \frac{1}{2} \quad p = n, \ n = N + 1 \implies$ по критерию Коши, гармонический ряд $(2.2)$ расходится.
+\end{example}
+
+\begin{remark}
+  Со всякой последовательностью $x_n$ можно связать ряд, частичными суммами которого являются члены этой последовательности. Пусть:
+  \begin{equation*}
+    x_1,x_2,\ldots,x_n,\ldots
+  \end{equation*}
+
+  Тогда ряд
+  \begin{equation*}
+    \underbrace{x_1}_{a_1} + \underbrace{(x_2 - x_1)}_{a_2} + \underbrace{(x_3 - x_2)}_{a_3} + \ldots + \underbrace{(x_n - x_{n-1})}_{a_n} + \ldots
+  \end{equation*}
+  \begin{equation*}
+    A_n = a_1 + \ldots + a_n = x_1 + (x_2 - x_1) + \ldots + (x_n - x_{n-1}) = x_n
+  \end{equation*}
+\end{remark}
+
+\begin{theorem}[необходимое условие сходимости ряда]
+  Если ряд $(2.1)$
+  \begin{equation*}
+    \sum_{n=1}^{\infty}a_n
+  \end{equation*}
+  сходится, тогда
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}a_n = 0
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Пусть ряд $(2.1)$
+  \begin{equation*}
+    \sum_{n=1}^{\infty}a_n
+  \end{equation*}
+  сходится, тогда $\exists \underset{n\rightarrow\infty}{\lim}A_n$,
+  \begin{eqnarray*}
+    \underset{n\rightarrow\infty}{\lim}a_n &=& \underset{n\rightarrow\infty}{\lim}(A_n - A_{n-1}) = \\
+    = \underset{n\rightarrow\infty}{\lim}A_n - \underset{n\rightarrow\infty}{\lim}A_{n-1} &=& 0
+  \end{eqnarray*}
+\end{proof}
+
+\begin{definition}[$m$-ный остаток]
+  Пусть дан ряд $(2.1)$
+  \begin{equation*}
+    \sum_{n=1}^{\infty}a_n.
+  \end{equation*}
+
+  Ряд вида
+  \begin{equation}
+    \sum_{n=m+1}^{\infty}a_n
+  \end{equation}
+  называется \textbf{$m$-ным остатком} ряда $(2.1)$
+\end{definition}
+
+\begin{theorem}[об остатке ряда]
+  Следующие условия эквивалентны:
+  \begin{enumerate}
+    \item Ряд $(2.1)$ сходится
+    \item $\forall$ его состаток сходится
+    \item Некоторый его остаток $(2.2)$ сходится
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{itemize}
+    \item $1.\implies 2.$
+
+          Пусть ряд $(2.1)$ сходится и его сумма равна $A$.
+
+          Пусть
+          \begin{equation*}
+            A_k^* = \sum_{n=m+1}^{m+k}a_n
+          \end{equation*}
+          -- $k$-тая частичная сумма ряда $(2.2)$.
+
+          Ряд $(2.2)$ сходится, если $\exists \underset{k\rightarrow\infty}{A_k^*}$:
+          \begin{equation*}
+            A_k^* = A_{m+k} - A_m
+          \end{equation*}
+          \begin{eqnarray*}
+            \underset{k\rightarrow\infty}{\lim}A_k^* &=& \underset{k\rightarrow\infty}{\lim}(A_{m+k} - A_n) = \\
+            = \underset{k\rightarrow\infty}{\lim}A_{m+k} - \underset{k\rightarrow\infty}{\lim}A_{m} &=& A - A_m
+          \end{eqnarray*}
+
+    \item $2. \implies 3.$ -- очевидно
+    \item $3. \implies 1.$
+
+          Пусть ряд $(2.1)$
+          \begin{equation*}
+            \sum_{n=m+1}^{\infty}A_n
+          \end{equation*}
+          -- сходится.
+
+          Тогда при $n > m$
+          \begin{equation*}
+            A_n = A_m + A_{n-m}^* = \sum_{k=m+1}^{m + (n-m)}a_k
+          \end{equation*}
+
+          Ряд $(2.1)$
+          \begin{equation*}
+            \sum_{n=1}^{\infty}a_n
+          \end{equation*}
+          сходится тогда и только тогда (по определению), когда
+          \begin{equation*}
+            \exists \underset{n\rightarrow\infty}{\lim}A_n.
+          \end{equation*}
+
+          Рассмотрим
+          \begin{eqnarray*}
+            \underset{n\rightarrow\infty}{\lim}A_n &=& \underset{n\rightarrow\infty}{\lim}(A_m + A_{n-m}^*) = \\
+            &=& \underset{n\rightarrow\infty}{\lim}A_m + \underset{n\rightarrow\infty}{\lim}A_{n-m}
+          \end{eqnarray*}
+          $\implies \exists \underset{n\rightarrow\infty}{\lim}A_n \implies (2.1)$ -- сходится.
+  \end{itemize}
+\end{proof}
+
+Обозначим $\alpha_m$ -- сумма $m$-того остатка ряда $(2.1) \ =$ сумме ряда $(2.2)$
+\begin{equation*}
+  \alpha_m = \sum_{n=m+1}^{\infty}a_n
+\end{equation*}
+\begin{center}
+  ($(2.1)$ сходится в этом случае)
+\end{center}
+
+\begin{effect}
+  Ряд $(2.1)$ сходится $\iff \underset{m\rightarrow\infty}{\lim} \alpha_m = 0$
+\end{effect}
+
+\begin{proof}
+  Самостоятельно $\overset{\cdot \lor \cdot}{\smile}$
+\end{proof}
+
+\begin{definition}
+  Пусть даны ряды
+  \begin{equation*}
+    (A) \ \sum_{n=1}^{\infty}a_n; \quad (B) \ \sum_{n=1}^{\infty}b_n
+  \end{equation*}
+
+  ДОПИСАТЬ
+\end{definition}
+
+\begin{theorem}[1-ый признак сравнения]
+  Пусть даны ряды
+  \begin{equation*}
+    (A) \ \sum_{n=1}^{\infty}a_n; \quad (B) \ \sum_{n=1}^{\infty}b_n
+  \end{equation*}
+
+  Причем $a_n > 0, \ b_n > 0 \ \forall n$.
+
+  Если $\exists N \in \mathbb{N}: \ \forall n > N \quad a_n \leqslant b_n$, то
+  \begin{enumerate}
+    \item Из сходимости ряда $(B) \implies$ сходимость ряда $(A)$
+    \item Из сходимости ряда $(A) \implies$ сходимость ряда $(B)$
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть ряд $(B)$ -- сходится $\implies$ по теореме $2.2.1$ его частичные суммы ограничены $\implies$ по неравенству $a_n\leqslant b_n$ частичные суммы ряда $(A)$ также ограничены $\implies$ по $2.2.1$ ряд $(A)$ сходится.
+    \item Аналогично
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[2-ой признак сравнения]
+  Пусть даны ряды
+  \begin{equation*}
+    (A) \ \sum_{n=1}^{\infty}a_n; \quad (B) \ \sum_{n=1}^{\infty}b_n
+  \end{equation*}
+
+  Причем $a_n > 0, \ b_n > 0 \ \forall n$.
+
+  Если $\underset{n\rightarrow\infty}{\lim}\frac{a_n}{b_n}=k, \ k\in [0;\infty]$, то
+  \begin{enumerate}
+    \item При $k=\infty$ из сходимости $(A) \implies$ сходимость ряда $(B)$
+    \item При $k=0$ из сходимости ряда $(B) \implies$ сходимость ряда $(A)$
+    \item При $0<k<\infty \ (k = const \ne 0)$ ряды $(A)$ и $(B)$ ведут себя одинаково
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Переписать доказательство для несобственных интегралов, заменив слово "интеграл" на слово "ряд".
+\end{proof}
+
+\begin{theorem}[3-й признак сравнения]
+  Пусть даны ряды
+  \begin{equation*}
+    (A) \ \sum_{n=1}^{\infty}a_n; \quad (B) \ \sum_{n=1}^{\infty}b_n
+  \end{equation*}
+
+  Причем $a_n > 0, \ b_n > 0 \ \forall n$.
+
+  Если $\exists N \in \mathbb{N}: \ \forall n > N$
+  \begin{equation*}
+    \frac{a_{n+1}}{a_n}\leqslant\frac{b_{n+1}}{b_n},
+  \end{equation*}
+  то
+  \begin{enumerate}
+    \item Из сходимости ряда $(B) \implies$ сходимость ряда $(A)$
+    \item Из расходимости ряда $(A) \implies$ расходимость ряда $(B)$
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Можно считать, что $N = 0$.
+
+  Тогда $\forall n > N$ имеем:
+  \begin{equation*}
+    \frac{a_2}{a_1}\leqslant\frac{b_2}{b_1}; \quad \frac{a_3}{a_2}\leqslant\frac{b_3}{b_2}; \quad \frac{a_4}{a_3}\leqslant\frac{b_4}{b_3}; \quad \ldots; \quad \frac{a_{n+1}}{a_n} \leqslant \frac{b_{n+1}}{b_n}.
+  \end{equation*}
+
+  Перемножим левые и правые части:
+  \begin{equation*}
+    \frac{a_2 \cdot a_3 \cdot a_4 \cdot \ldots \cdot a_{n+1}}{a_1 \cdot a_2 \cdot a_3 \cdot \ldots \cdot a_n} \leqslant \frac{b_2 \cdot b_3 \cdot b_4 \cdot \ldots \cdot b_{n+1}}{b_1 \cdot b_2 \cdot b_3 \cdot \ldots \cdot b_n},
+  \end{equation*}
+  \begin{equation*}
+    \frac{a_{n+1}}{a_1} \leqslant \frac{b_{n+1}}{b_n} \implies a_{n+1} \leqslant \frac{a_1}{b_1}\cdot b_{n+1}.
+  \end{equation*}
+  \begin{enumerate}
+    \item Если ряд $(B) \ \sum_{n=1}^{\infty}b_n$ сходится $\implies$ сходится ряд $\sum_{n=1}^{\infty}\frac{a_1}{b_1}\cdot b_{n+1} \implies$ сходится ряд $\sum_{n=1}^{\infty}a_{n+1} \implies \sum_{n=1}^{\infty}a_n$
+    \item Аналогично
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[интегральный признак Коши-Маклорена]
+  Пусть дан положительный ряд
+  \begin{equation*}
+    (A) \ \sum_{n=1}^{\infty}a_n
+  \end{equation*}
+
+  Если функция $f(x)$ удовлетворяет следующим условиям:
+  \begin{enumerate}
+    \item $f(x): \ [1;+\infty] \rightarrow\mathbb{R}$
+    \item $f(x)$ -- монотонна
+    \item $f(x) = a_n, \ \forall n \in \mathbb{N}$
+  \end{enumerate}
+  тогда ряд $(A)$ и интеграл $\int_{1}^{\infty}f(x)dx$ ведут себя одинаково
+\end{theorem}
+
+\begin{proof}
+  Ограничимся случаем, когда $f(x)$ монотонно убывает.
+
+  Рассмотрим функцию $\phi(x) = a_n$ при $n \leqslant x < n+1$ и $\psi(x) = a_{n+1}$ при $n\leqslant x <n + 1$. Тогда $\forall x \in [1;+\infty)$
+  \begin{equation*}
+    \psi(x) \leqslant f(x) \leqslant\phi(x).
+  \end{equation*}
+
+  Отсюда
+  \begin{multline*}
+    \int_{1}^{N}\psi(x)dx \leqslant \int_{1}^{N}f(x)dx \leqslant\int_{1}^{N}\phi(x)dx \implies \\
+    \implies \underbrace{\sum_{n=1}^{N}a_{n+1}}_{partial \ series \ sum \ (A)}^{(1)} \leqslant \int_{1}^{N}f(x)dx \leqslant \underbrace{\sum_{n=1}^{N}a_n}_{partial \ series \ sum \ (A)}^{(2)}
+  \end{multline*}
+
+  Если интеграл сходится, то частичная сумма $(1)$ ограничена $\implies$ ряд $(A)$ сходится. Если интеграл расзодится, то частичная сумма $(2)$ непрерывна $\implies$ ряд $(A)$ -- расходится.
+
+  Если ряд $(A)$ сходится, то $(2)$ -- ограничена $\implies$ $\int_{1}^{N}f(x)dx$ -- ограничен $\implies \int_{1}^{\infty}f(x)dx$ -- сходится.
+
+  Если ряд $(A)$ расходится $\implies$ частичная сумма $(1)$ неограничена $\implies$ интеграл расходится.
+\end{proof}
+
+\begin{example}
+  \begin{enumerate}
+    \item $\sum_{n=1}^{\infty}\frac{1}{n^p}$
+
+          Рассмотрим $f(x) = \frac{1}{x^p}$ на $[1;+\infty)$ -- непрерывно монотонно $\downarrow$, $f(n) = \frac{1}{n^p}$.
+
+          $\sum_{n=1}^{\infty}\frac{1}{n^p}$ ведет себя одинаково с интегралом $\int_{1}^{\infty}\frac{dx}{x^p}$ -- сходится при $p>1$ и расходится при $p\leqslant1 \implies$ ряд $\sum_{n=1}^{\infty}\frac{1}{n^p}$ сходится при $p>1$ и расходится при $p\leqslant1$.
+
+    \item $\sum_{n=1}^{\infty}$
+
+          $f(x) = \frac{1}{x\ln x}, \ x \in [e;+\infty), \ \downarrow$, непрерывна.
+
+          \begin{multline*}
+            \int_{e}^{\infty}\frac{dx}{x\ln x} = \underset{b\rightarrow\infty}{\lim}\int_{e}^{b}\frac{d(\ln x)}{\ln x} =\\
+            = \underset{b\rightarrow\infty}{\lim}(\ln(\ln x))\big|_e^b = \underset{b\rightarrow\infty}{\lim}\ln (\ln b) = \infty \implies
+          \end{multline*}
+          $\implies$ ряд $\sum_{n=1}^{\infty}\frac{1}{n\ln n}$ расходится (по интегралу Коши-Маклорена)
+  \end{enumerate}
+\end{example}
+
+\begin{theorem}[радикальный признак Коши]
+  Пусть ряд $(A) \ \sum_{n=1}^{\infty}a_n$ положительный и $\underset{n\rightarrow\infty}{\overline{\lim}}\sqrt[n]{a_n} = q$. Тогда:
+  \begin{enumerate}
+    \item При $q < 1$ ряд $(A)$ сходится
+    \item При $q > 1$ ряд $(A)$ расходится
+    \item При $q = 1$ -- ?
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть $q < 1$. Возьмем число $r: \ q < r < 1$. Тогда $\exists N: \ \forall n > N$
+          \begin{equation*}
+            \sqrt[n]{a_n} < r \implies a_n < r^n
+          \end{equation*}
+
+          $0 < r < 1 \implies \sum_{n=1}^{\infty}r^n$ -- сходится $\implies$ по 1-му признаку сравнения сходится ряд $\sum_{n=1}^{\infty}a_n$
+
+    \item Пусть $q > 1$, то существует подпоследовательность $\sqrt[n_i]{a_{n_i}} \rightarrow q$ при $i\rightarrow\infty \implies a_{n_i}\rightarrow q^{n_i} > 1 \implies$ ряда $\sum_{n=1}^{\infty}a_n$ расходится
+
+    \item Рассмотрим ряды $\sum_{n=1}^{\infty}\frac{1}{n}$ и $\sum_{n=1}^{\infty}\frac{1}{n^2}$ сходятся.
+          \begin{equation*}
+            \underset{n\rightarrow\infty}{\lim}\sqrt[n]{\frac{1}{n}} = \underset{n\rightarrow\infty}{\lim}\sqrt[n]{\frac{1}{n^2}} = 1
+          \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[признак Даламбера]
+  Пусть ряд $(A) \ \sum_{n=1}^{\infty}a_n$ положительный и
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}\frac{a_{n+1}}{a_n} = d.
+  \end{equation*}
+
+  Тогда
+  \begin{enumerate}
+    \item При $d < 1$ ряд $(A)$ сходится
+    \item При $d > 1$ ряд $(A)$ расходится
+    \item При $d = 1$ -- ?
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть $d < 1$. Возьмем $d < r < 1 \implies \exists N: \ \forall n > N$
+          \begin{equation*}
+            \frac{a_{n+1}}{a_n}<r
+          \end{equation*}
+          \begin{equation*}
+            b_1 = \frac{a_2}{a_1}; \quad b_2 = \frac{a_3}{a_2}; \quad b_3 = \frac{a_4}{a_3}; \quad \ldots; \quad b_n = \frac{a_{n+1}}{a_n}; \quad \ldots
+          \end{equation*}
+  \end{enumerate}
+
+  Можно считать, что $N=0$, тогда $\forall n > N \begin{array}{l}
+      a_2 < r \cdot a_1                 \\
+      a_3 < r \cdot a_2 < r^2 \cdot a_1 \\
+      a_4 < r \cdot a_3 < r^3 \cdot a_1 \\
+      \vdots                            \\
+      a_{n+1} < r^n \cdot a_1
+    \end{array}$.
+
+  Так как $0 < r < 1$, то $\sum_{n=1}^{\infty} r^n \cdot a_1$ сходится $\implies$ сходится ряд $(A)$ по 1 признаку сравнения.
 \end{proof}
 
 \end{document}
