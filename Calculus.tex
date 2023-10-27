@@ -1476,17 +1476,461 @@ $\lambda = (\lambda^1,\ldots,\lambda^k), \ \lambda^i \in \mathbb{R}$ -- коэф
           \begin{equation*}
             b_1 = \frac{a_2}{a_1}; \quad b_2 = \frac{a_3}{a_2}; \quad b_3 = \frac{a_4}{a_3}; \quad \ldots; \quad b_n = \frac{a_{n+1}}{a_n}; \quad \ldots
           \end{equation*}
+          Можно считать, что $N=0$, тогда $\forall n > N \begin{array}{l}
+              a_2 < r \cdot a_1                 \\
+              a_3 < r \cdot a_2 < r^2 \cdot a_1 \\
+              a_4 < r \cdot a_3 < r^3 \cdot a_1 \\
+              \vdots                            \\
+              a_{n+1} < r^n \cdot a_1
+            \end{array}$.
+
+          Так как $0 < r < 1$, то $\sum_{n=1}^{\infty} r^n \cdot a_1$ сходится $\implies$ сходится ряд $(A)$ по 1 признаку сравнения.
+    \item Самостоятельно.
+    \item $\sum_{n=1}^{\infty}\frac{1}{n}, \quad \sum_{n=1}^{\infty}\frac{1}{n^2}$.
+
+          \begin{eqnarray*}
+            \underset{n\rightarrow\infty}{\lim}\frac{a_{n+1}}{a_n} = \underset{n\rightarrow\infty}{\lim}\frac{\frac{1}{n+1}}{\frac{1}{n}} & = & \\
+            & = & \underset{n\rightarrow\infty}{\lim}\frac{n}{n+1} = 1;
+          \end{eqnarray*}
+
+          \begin{equation*}
+            \underset{n\rightarrow\infty}{\lim}\frac{\frac{1}{(n+1)^2}}{\frac{1}{n^2}} = \underset{n\rightarrow\infty}{\lim}\frac{n^2}{(n+1)^2} = 1.
+          \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[признак Раббе]
+  Пусть $(A) \ \sum_{n=1}^{\infty}a_n$ -- положительная. Если
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}n \cdot (\frac{a_n}{a_{n+1}}) = r,
+  \end{equation*}
+  то
+  \begin{enumerate}
+    \item При $r>1$ ряд $(A)$ сходится;
+    \item При $r<1$ ряд $(A)$ расходится;
+    \item При $r=1$ ряд $(A)$ -- ?
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть $r>1$. Возьмем $p$ и $q$:
+          \begin{equation*}
+            1 < p < q < r.
+          \end{equation*}
+
+          Так как
+          \begin{equation*}
+            \underset{n\rightarrow\infty}{\lim}n\cdot(\frac{a_n}{a_{n+1}} - 1) = r,
+          \end{equation*}
+          то $\exists N_1: \ \forall n > N_1 \quad n\cdot(\frac{a_n}{a_{n+1}} - 1) > q$, то есть
+          \begin{equation}
+            \frac{a_n}{a_{n+1}} > 1 + \frac{q}{n}.
+          \end{equation}
+
+          Далее, рассмотрим
+          \begin{equation*}
+            \underset{n\rightarrow\infty}{\lim}\frac{(1 + \frac{1}{n})^p - 1}{\frac{1}{n}} \overset{Taylor's \ f.}{=} \underset{n\rightarrow\infty}{\lim}\frac{1 + \frac{p}{n} + o(\frac{1}{n}) - 1}{\frac{1}{n}} = p < q \implies
+          \end{equation*}
+          $\implies \exists N_2: \ \forall n > N_2$
+          \begin{equation}
+            \frac{(1 + \frac{1}{n})^p - 1}{\frac{1}{n}} < q \implies (1 + \frac{1}{n})^p < 1 + \frac{q}{n}.
+          \end{equation}
+
+          Сравниваем неравенства $(2.4)$ и $(2.5)$, получим, что при $n > \max(N_1,N_2)$:
+          \begin{eqnarray*}
+            (1 + \frac{1}{n})^p < 1 + \frac{q}{n} & < & \frac{a_n}{a_{n+1}} \implies \\
+            \implies \frac{a_n}{a_{n+1}} & > & (1 + \frac{1}{n}^p) = \frac{(n+1)^p}{n^p} = \frac{\frac{1}{n^p}}{\frac{1}{(n+1)^p}}.
+          \end{eqnarray*}
+
+          Ряд $\sum_{n=1}^{\infty}\frac{1}{n^p}$ сходится при $p > 1$:
+          \begin{eqnarray*}
+            \frac{a_n}{a_{n+1}} > \frac{\frac{1}{n^p}}{\frac{1}{(n+1)^p}} & \implies & a_n \cdot \frac{1}{(n+1)^p} > \\
+            > \frac{1}{n^p} \cdot a_{n+1} & \implies & \frac{a_{n+1}}{a_n} < \frac{\frac{1}{(n+1)^p}}{\frac{1}{n^p}}.
+          \end{eqnarray*}
+
+          По 3-му признаку сравнения, ряд $(A)$ сходится при $p > 1 \implies$ при $r > 1$.
+
+    \item Пусть $r < 1$. Тогда $\exists N: \ \forall n > N$:
+          \begin{multline*}
+            n \cdot (\frac{a_n}{a_{n+1}} - 1) < 1 \implies \\
+            \implies \frac{a_n}{a_{n+1}} < 1 + \frac{1}{n} = \frac{n+1}{n} = \frac{\frac{1}{n}}{\frac{1}{n+1}} \implies \\
+            \implies \frac{a_{n+1}}{a_n} > \frac{\frac{1}{n+1}}{\frac{1}{n}}.
+          \end{multline*}
+
+          Ряд $\sum_{n=1}^{\infty}\frac{1}{n}$ -- гармонический, расходящийся $\implies$ по 3-му признаку сравнения ряд $(A)$ расходится.
+
+    \item \underline{Упражнение:} привести 2 примера рядов (сходящийся, расходящийся), но $r=1$ в обоих случаях.
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[признак Кумера]
+  Пусть дан ряд $(A) \ \sum_{n=1}^{\infty}a_n$ -- положительный. Пусть числа $c_1,c_2,\ldots,c_n,\ldots: \ \forall n > N \ c_n > 0$ и ряд $\sum_{n=1}^{\infty}\frac{1}{c_n}$ -- расходится. Если
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}(c_n \cdot \frac{a_n}{a_{n+1}} - c_{n+1}) = k,
+  \end{equation*}
+  то
+  \begin{enumerate}
+    \item При $k > 0$ ряд $(A)$ сходится;
+    \item При $k < 0$ ряд $(A)$ расходится;
+    \item При $k = 1$ -- ?
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть $k > 0$. Возьмем $0 < p < k$.
+
+          Тогда $\exists N : \ \forall n > N$:
+          \begin{multline*}
+            c_n \cdot \frac{a_n}{a_{n+1}} - c_{n+1}>p \implies \\
+            \implies c_n \cdot a_n - c_{n+1} \cdot a_{n+1} > p \cdot a_{n+1} > 0 \implies \\
+            \implies c_n \cdot a_n > c_{n+1} \cdot a_{n+1}, \quad \forall n > N
+          \end{multline*}
+
+          Тогда последовательность $\{c_n\cdot a_n\}$ убывает и ограничена снизу $\implies$ последовательность сходится.
+
+          Пусть $c=\underset{n\rightarrow\infty}{\lim}c_n\cdot a_n$. Рассмотрим ряд
+          \begin{multline*}
+            \sum_{m=1}^{n}(c_m\cdot a_m - c_{m+1}\cdot a_{m+1}) = \\
+            = (c_1 \cdot a_1 - c_2 \cdot a_2) + (c_2 \cdot a_2 - c_3 \cdot a_3) + \ldots + (c_n \cdot a_n - c_{n+1}\cdot a_{n+1}) = \\
+            = c_1 \cdot a_1 - c_{n+1} \cdot a_{n+1};
+          \end{multline*}
+
+          \begin{multline*}
+            \underset{n\rightarrow\infty}{\lim}\sum_{m=1}^{n}(c_m \cdot a_m - c_{m+1} \cdot a_{n+1}) = \\
+            = \underset{n\rightarrow\infty}{\lim}(c_1 \cdot a_1 - c_{n+1} \cdot a_{n+1}) = c_1 \cdot a_1 - c \implies
+          \end{multline*}
+          $\implies$ сходится ряд $\sum_{n=1}^{\infty}(c_n \cdot a_n - c_{n+1} \cdot a_{n+1}) \implies$ из того, что $c_n \cdot a_n - c_{n+1} \cdot a_{n+1} > p \cdot a_{n+1} > 0$ и 1-го признака сравнения $\implies$ ряд $\sum_{n=1}^{\infty}p\cdot a_{n+1}$ сходится $\implies$ ряд $(A)$ сходится.
+
+    \item Пусть $k < 0 \implies \exists N: \ \forall n > N$
+          \begin{multline*}
+            c_n \cdot \frac{a_n}{a_{n+1}} - c_{n+1} < 0 \implies \\
+            \implies \frac{a_n}{a_{n+1}} < \frac{c_{n+1}}{c_n} = \frac{\frac{1}{c_n}}{\frac{1}{c+{n+1}}} \implies \\
+            \implies \frac{a_{n+1}}{a_{n}} > \frac{\frac{1}{c_{n+1}}}{\frac{1}{c_n}};
+          \end{multline*}
+
+          $\sum_{n=1}^{\infty}\frac{1}{c_n}$ расходится $\implies$ по 3-му признаку сравнения ряд $(A)$ расходится.
+
+    \item Придумать 2 примера когда $k=0$ и ряды сходятся/расходятся.
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[признак Бертрана]
+  Пусть ряд $(A) \ \sum_{n=1}^{\infty}a_n$ -- положительный. Если
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim} \ln n \cdot [n \cdot (\frac{a_n}{a_{n+1}} - 1)] = B,
+  \end{equation*}
+  то
+  \begin{enumerate}
+    \item При $B > 1$ ряд $(A)$ сходится;
+    \item При $B < 1$ ряд $(A)$ расходится;
+    \item При $B = 1$ ряд $(A)$ -- ?
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим ряд $\sum_{n=2}^{\infty} \frac{1}{n\cdot \ln n}$ -- расходится. Составим последовательность Кумера:
+  \begin{multline*}
+    k_n = \underbrace{n \cdot \ln n}_{c_n} \cdot \frac{a_n}{a_{n+1}} - \underbrace{(n+1) \cdot \ln(n+1)}_{c_{n+1}} = \\
+    = \left| \ln(n+1) = \ln(n\cdot \frac{n+1}{n}) = \ln n + \ln(1 + \frac{1}{n}) \right| = \\
+    = n \cdot \ln n \cdot \frac{a_n}{a_{n+1}} - (n+1)\cdot (\ln n + \ln(1 + \frac{1}{n})) = \\
+    = n \cdot \ln n \cdot \frac{a_n}{a_{n+1}} - n\cdot \ln n - \ln n - \ln(1 + \frac{1}{n})^{n+1} = \\
+    = \ln n (n \cdot \frac{a_n}{a_{n+1}} - n - 1) - \ln (1 + \frac{1}{n})^{n+1} = \\
+    = \ln n \cdot (n(\frac{a_n}{a_{n+1}} - 1) - 1) - \ln(1+\frac{1}{n})^{n+1};
+  \end{multline*}
+  \begin{multline*}
+    \underset{n\rightarrow\infty}{\lim} k_n = \\
+    = \underset{n\rightarrow\infty}{\lim}[\underbrace{\ln n \cdot (n(\frac{a_n}{a_{n+1}} - 1) - 1)}_{B} - \ln(\underbrace{1 + \frac{1}{n}^n}_{e}) - \ln(1 + \frac{1}{n})] = \\
+    = B - 1,
+  \end{multline*}
+  по признаку Кумера, при $B-1 > 0$ ряд $(A)$ сходится, при $B-1 < 0$ ряд $(A)$ расходится, при $B=1$ -- ?
+\end{proof}
+
+\begin{theorem}[признак Гаусса]
+  Ряд $(A) \ \sum_{n=1}^{\infty} a_n, \ a_n > 0, \ \forall n \in \mathbb{N}, \ \lambda, \mu \in \mathbb{R}$. Если
+  \begin{equation*}
+    \frac{a_n}{a_{n+1}} = (\lambda + \frac{\mu}{n}) + O(\frac{1}{n^2}),
+  \end{equation*}
+  то
+  \begin{enumerate}
+    \item При $\lambda > 1$, ряд $(A)$ сходится;
+    \item При $\lambda < 1$, ряд $(A)$ расходится;
+    \item При $\lambda = 1$ и \begin{enumerate}
+            \item $\mu > 1 \implies$ ряд $(A)$ сходится;
+            \item $\mu \leqslant 1 \implies$ ряд $(A)$ расходится.
+          \end{enumerate}
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Если $\lambda < 1$, то
+          \begin{multline*}
+            \underset{n\rightarrow\infty}{\lim} \frac{a_{n+1}}{a_n} = [\underset{n\rightarrow\infty}{\lim}(\lambda + \frac{\mu}{n} + O(\frac{1}{n^2}))]^{-1} = \\
+            = [\underset{n\rightarrow\infty}{\lim}(\lambda + \underbrace{\frac{\mu}{n}}_{\rightarrow 0} + \underbrace{\frac{1}{n^2}}_{\rightarrow 0} \cdot \Omega(\frac{1}{n^2}))]^{-1} = \frac{1}{\lambda},
+          \end{multline*}
+          по признаку Даламбера, если $\frac{1}{\lambda} < 1$, то есть $\lambda > 1$, ряд $(A)$ сходится.
+
+    \item Если $\lambda > 1$, то
+          \begin{multline*}
+            \underset{n\rightarrow\infty}{\lim} \frac{a_{n+1}}{a_n} = [\underset{n\rightarrow\infty}{\lim}(\lambda + \frac{\mu}{n} + O(\frac{1}{n^2}))]^{-1} = \\
+            = [\underset{n\rightarrow\infty}{\lim}(\lambda + \underbrace{\frac{\mu}{n}}_{\rightarrow 0} + \underbrace{\frac{1}{n^2}}_{\rightarrow 0} \cdot \Omega(\frac{1}{n^2}))]^{-1} = \frac{1}{\lambda},
+          \end{multline*}
+          по признаку Даламбера, если $\frac{1}{\lambda} > 1$, то есть $\lambda < 1$, ряд $(A)$ расходится.
+
+    \item Если $\lambda = 1$
+          \begin{equation*}
+            \frac{a_n}{a_{n+1}} = 1 + \frac{\mu}{n} + O(\frac{1}{n^2});
+          \end{equation*}
+          \begin{equation*}
+            n(\frac{a_n}{a_{n+1}} - 1) = \mu + n \cdot O(\frac{1}{n^2});
+          \end{equation*}
+          \begin{equation*}
+            \underset{n\rightarrow\infty}{\lim}(n\cdot \frac{a_n}{a_{n+1}} - 1) = \underset{n\rightarrow\infty}{\lim}(\mu + \underbrace{n \cdot \frac{1}{n^2} \cdot \Omega (\frac{1}{n^2})}_{\rightarrow 0}) = \mu \implies
+          \end{equation*}
+          $\implies$ по признаку Реббе $\implies \left[\begin{array}{l}
+              \mu > 1 \implies (A) \rightarrow\leftarrow \\
+              \mu < 1 \implies (A) \leftarrow\rightarrow \\
+            \end{array} \right.$
+
+          Пусть $\mu = 1$, тогда
+          \begin{multline*}
+            \underset{n\rightarrow\infty}{\lim}\ln n \cdot (n \cdot (\frac{a_n}{a_{n+1}} - 1) - 1) = \\
+            = \underset{n\rightarrow\infty}{\lim}\ln n \cdot (n \cdot (1 + \frac{1}{n} + O(\frac{1}{n^2}) - 1) - 1) = \\
+            = \underset{n\rightarrow\infty}{\lim}\ln n \cdot (1 + n \cdot O(\frac{1}{n^2}) - 1) = \underset{n\rightarrow\infty}{\lim}\ln n \cdot n \cdot O(\frac{1}{n^2}) = \\
+            = \underset{n\rightarrow\infty}{\lim}(\ln n \cdot n \cdot \frac{1}{n^2} \cdot \Omega(\frac{1}{n^2})) = \underset{n\rightarrow\infty}{\lim}\frac{\ln n}{n} \cdot \Omega(\frac{1}{n^2}) = 0.
+          \end{multline*}
+          В самом деле,
+          \begin{equation*}
+            \underset{n\rightarrow\infty}{\lim}\frac{\ln n}{n} = \underset{n\rightarrow\infty}{\lim} \frac{1}{n} \cdot \ln n = \underset{n\rightarrow\infty}{\lim}\ln n^{\frac{1}{n}} = \underset{n\rightarrow\infty}{\lim} \ln \sqrt[1]{n} = 0 \implies
+          \end{equation*}
+          $\implies$ по прихнаку Бертрана ряд $(A)$ расходится.
+  \end{enumerate}
+\end{proof}
+
+\section{Сходимость знакопеременных рядов}
+
+Пусть дан ряд $(A) \ \sum_{n=1}^{\infty} a_n$. Если $\exists N: \ \forall n > N \ a_n$ не меняет знак, то исследование сходимости такого ряда сводится к исследованию сходимости положительных рядов. Будем считать, что "$+$" и "$-$" бесконечно много. Такие ряды будем называть \textbf{знакопеременными}.
+
+\begin{definition}[абсолютно сходящийся ряд]
+  Ряд $(A)$ называется \textbf{абсолютно сходящимся}, если сходится ряд
+  \begin{equation*}
+    (A^*) \quad \sum_{n=1}^{\infty}|a_n|
+  \end{equation*}
+\end{definition}
+
+\begin{statement}
+  Если ряд $(A)$ абсолютно сходится, то он сходится.
+\end{statement}
+
+\begin{proof}
+  $\leftarrow$ Пусть ряд $(A)$ абсолютно сходящийся, то есть сходится ряд $(A^*) \ \sum_{n=1}^{\infty}|a_n| \implies$ по критерию Коши $\forall \epsilon > 0 \ \exists N: \ \forall n > N \ \forall p > 0$
+  \begin{equation*}
+    |a_{n+1}| + |a_{n+1}| + \ldots + |a_{n+1}| < \epsilon
+  \end{equation*}
+  $\rightarrow$ Пусть $\epsilon > 0$ задано. Рассмотрим
+  \begin{equation*}
+    |A_{n+p} - A_n| = |a_{n+1} + \ldots + a_{n+p}| \leqslant |a_{n+1}| + \ldots + |a_{n+p}| < \epsilon
+  \end{equation*}
+  $\implies$ ряд $(A)$ сходится.
+\end{proof}
+
+\begin{definition}[условно сходящийся ряд]
+  Если ряд $(A)$ сходится, а ряд $(A^*)$ расходится, то ряд $(A)$ называется \textbf{условно сходящимся}.
+\end{definition}
+
+\begin{definition}[знакочередующийся ряд]
+  Ряд $(A)$ называется \textbf{знакочередующимся}, если $\forall n \in \mathbb{N} \quad a_n \cdot a_{n+1} < 0$. Обозначим знакочередующийся ряд:
+  \begin{equation*}
+    (\overline{A}) \quad \sum_{n=1}^{\infty}(-1)^{n-1}\cdot a_n, \quad a_n > 0 \ \forall n \in\mathbb{N}
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}[признак Лейбница]
+  Пусть ряд $(\overline{A}) \ \sum_{n=1}^{\infty}(-1)^{n-1}\cdot a_n \ (a_n > 0 \ \forall n)$ удовлетворяет условиям:
+  \begin{enumerate}
+    \item $a_1 \geqslant a_2 \geqslant a_3 \geqslant \ldots \geqslant a_n \geqslant \ldots$;
+    \item $\underset{n\rightarrow\infty}{\lim} a_n = 0$.
   \end{enumerate}
 
-  Можно считать, что $N=0$, тогда $\forall n > N \begin{array}{l}
-      a_2 < r \cdot a_1                 \\
-      a_3 < r \cdot a_2 < r^2 \cdot a_1 \\
-      a_4 < r \cdot a_3 < r^3 \cdot a_1 \\
-      \vdots                            \\
-      a_{n+1} < r^n \cdot a_1
-    \end{array}$.
+  Тогда ряд $(\overline{A})$ сходится и его сумма $S: \quad 0 < S \leqslant a_1$.
+\end{theorem}
 
-  Так как $0 < r < 1$, то $\sum_{n=1}^{\infty} r^n \cdot a_1$ сходится $\implies$ сходится ряд $(A)$ по 1 признаку сравнения.
+\begin{proof}
+  Рассмотрим
+  \begin{multline*}
+    S_{2n} = a_1 - a_2 + a_3 - \ldots + a_{2n - 1} - a_{2n} = \\
+    = (a_1 - a_2) + (a_3 - a_4) + \ldots + (a_{2n-1} - a_{2n}),
+  \end{multline*}
+  тогда $\forall i: \ a_i - a_{i+1} \geqslant 0 \implies S_{2n}\geqslant 0 \ \forall n \implies$ последовательность $S_{2n} \nearrow$.
+
+  С другой стороны,
+  \begin{equation*}
+    S_{2n} = a_1 - \underbrace{(a_2 - a_3)}_{\geqslant 0} - \underbrace{(a_4 - a_5)}_{\geqslant 0} - \ldots - \underbrace{(a_{2n-2} - a_{2n-1})}_{\geqslant0} - a_{2n}
+  \end{equation*}
+  $\implies S_{2n} \leqslant a_1 \ \forall n$.
+
+  Таким образом, $S_{2n}$ не убывает и ограничена сверху $\implies$ по теореме Вейерштрасса $\implies \exists \underset{n\rightarrow\infty}{\lim} S_{2n} = S$.
+
+  Далее,
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}S_{2n+1} = \underset{n\rightarrow\infty}{\lim}(S_{2n} + a_{2n+1}) = \underset{n\rightarrow\infty}{\lim}S_{2n} + \underset{n\rightarrow\infty}{\lim} a_{2n+1} = S + 0 = S.
+  \end{equation*}
+
+  Таким образом, $\underset{n\rightarrow\infty}{\lim}S_n = S$.
+
+  Так как $0 < S_n \leqslant a_1$ (если $S_n = 0$, то $a_1$ может быть $=0$, что невозможно, так как $a_1 > 0$) $\implies$ (берем пределы от неравенства) $0 < S \leqslant a_1$.
 \end{proof}
+
+\begin{effect}
+  Если знакочередующийся ряд $(\overline{A})$ сходится, то сумма его $n$-го остатка имеет знак $(n+1)$-го члена ряда и не больше его по модулю.
+\end{effect}
+
+\begin{example}
+  \begin{enumerate}
+    \item Рассмотрим ряд
+          \begin{equation*}
+            (\overline{H}) \quad \sum_{n=1}^{\infty}(-1)^{n-1}\frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \ldots + (-1)^{n-1}\frac{1}{n} + \ldots,
+          \end{equation*}
+          по признаку Лейбница:
+          \begin{enumerate}
+            \item $1 > \frac{1}{2} > \frac{1}{3} > \ldots > \frac{1}{n}$;
+            \item $\underset{n\rightarrow\infty}{\lim}\frac{1}{n} = 0$
+          \end{enumerate}
+          $\implies (\overline{H})$ сходится, $0 < S \leqslant 1$;
+
+    \item Рассмотрим $\sum_{n=1}^{\infty}|(-1)^{n-1}\frac{1}{n}| = \sum_{n=1}^{\infty}\frac{1}{n}$ -- расходится $\implies$ ряд $(\overline{H})$ -- условно сходящийся.
+  \end{enumerate}
+\end{example}
+
+\begin{theorem}[признак Абеля и Дирихле]
+  \begin{enumerate}
+    \item (Абеля) Если \begin{itemize}
+            \item последовательность $\{a_n\}$ монотонна и ограничена;
+            \item ряд $\sum_{n=1}^{\infty} b_n$ сходится, то
+          \end{itemize}
+          ряд $\sum_{n=1}^{\infty}a_n \cdot b_n$ сходится.
+
+    \item (Дирихле) Если \begin{itemize}
+            \item последовательность $\{a_n\}$ монотонна и $\underset{n\rightarrow\infty}{\lim}a_n = 0$;
+            \item частичные суммы ряд $(B) \ \sum_{n=1}^{\infty}b_n$ ограничены, то есть $\exists k > 0: \ \forall n \quad |\sum_{m=1}^{n} b_m < k$, то $\sum_{n=1}^{\infty}a_n \cdot b_n$ сходится.
+          \end{itemize}
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Доказательство теоремы]
+  \begin{lemma}
+    \begin{enumerate}
+      \item Если числа $a_1,a_2,\ldots,a_n$ либо не возрастают, либо не убывают;
+      \item Суммы $B_1 = b_1, \ B_2 = b_1 + b_2, \ \ldots, \ B_n = b_1 + b_2 + \ldots + b_n: \ \forall k = 1,\ldots,n \quad |B_k| \leqslant L$, тогда
+            \begin{equation}
+              \quad \bigg|\sum_{k=1}^{n} a_k \cdot b_k \bigg| \leqslant L\cdot (|a_1| + |a_n|)
+            \end{equation}
+    \end{enumerate}
+  \end{lemma}
+
+  \begin{proof}[Доказательство леммы]
+    Рассмотрим
+    \begin{multline*}
+      a_1 \cdot b_1 + a_2 \cdot b_2 + \ldots + a_n \cdot b_n = \\
+      = a_1 \cdot B_1 + a_2 \cdot (B_2 - B_1) + a_3 \cdot (B_3 - B_2) + \ldots + a_n \cdot (B_n - B_{n-1}) = \\
+      = a_1 \cdot B_1 + a_2 \cdot B_2 - a_2 \cdot B_1 + a_3\cdot B_3 - a_3 \cdot B_2 + \ldots + a_n \cdot B_n - a_n \cdot B_{n-1} = \\
+      = B_1\cdot (a_1 - a_2) + B_2\cdot (a_2 - a_3) + B_3 \cdot (a_3 - a_4) + \ldots + B_{n-1} \cdot (a_{n-1} - a_n) + a_n \cdot B_n = \\
+      = \sum_{k=1}^{n-1} B_k \cdot (a_k - a_{k-1}) + a_n \cdot B_n.
+    \end{multline*}
+
+    Таким образом,
+    \begin{multline*}
+      \bigg|\sum_{k=1}^{n}a_k\cdot b_k \bigg| = \bigg|\sum_{k=1}^{n-1} B_k \cdot (a_k - a_{k+1}) + a_n \cdot B_n\bigg| \leqslant \\
+      \leqslant \sum_{k=1}^{n-1}|B_k| \cdot |a_k - a_{k+1} + |a_n| \cdot |B_n| \leqslant L\cdot \bigg(\sum_{k=1}^{n-1}|a_k - a_{k+1}| + |a_n|\bigg) = \\
+      = L\cdot (|a_1| + |a_n| + |a_n|) = L\cdot (|a_1| + 2\cdot |a_n|).
+    \end{multline*}
+  \end{proof}
+
+  \begin{enumerate}
+    \item Пусть выполнены условия признака Абеля. Тогда $\exists M > 0: \ |a_n| \leqslant M$. Пусть $\epsilon > 0$ задано. Возьмем номер $N: \ \forall n > N, \ \forall p > 0$
+    \begin{equation*}
+      \bigg|\sum_{k=n+1}^{n+p}b_k\bigg| < \epsilon^* = \frac{\epsilon}{3\cdot M}.
+    \end{equation*}
+
+    Частичные суммы ряда $\sum_{n=1}^{\infty}a_n\cdot b_n$ имеют вид $S_n = a_1\cdot b_1 + \ldots + a_n \cdot b_n$. По критерию Коши найдем $N_1: \ \forall n > N_1, \forall p > 0$
+    \begin{equation*}
+      |S_{n+p} - S_n| < \epsilon,
+    \end{equation*}
+    \begin{multline*}
+      |a_{n+1} \cdot b_{n+1} + a_{n+2} \cdot b_{n+2} + \ldots + a_{n+p} \cdot b_{n+p}| \leqslant \\
+      \leqslant \epsilon^* \cdot (|a_{n+1}| + 2 \cdot |a_{n+p}|) \leqslant \epsilon^* \cdot 3 \cdot M = \frac{\epsilon}{3 \cdot M} = \epsilon \implies
+    \end{multline*}
+    $\implies$ по критерию Коши ряд $\sum_{n=1}^{\infty}a_n \cdot b_n$ сходится.
+
+    \item Пусть выполнены условия признака Дирихле. Так как $\underset{n\rightarrow\infty}{\lim}a_n = 0$, то $\exists N: \ \forall n > N \quad (\epsilon > 0$ задано):
+    \begin{equation*}
+      |a_n| < \frac{\epsilon}{3 \cdot k}, \quad \bigg|\sum_{k=1}^{n}b_k\bigg| \leqslant k.
+    \end{equation*}
+
+    По критерию Коши:
+    \begin{multline*}
+      |S_{n+p} - S_n| = |a_{n+1} \cdot b_{n+1} + \ldots + a_{n+p} \cdot b_{n+p}| \overset{by \ lemma}{\leqslant} \\
+      \leqslant k\cdot(|a_{n+1}| + 2\cdot |a_{n+p}|) < k\cdot \frac{3\cdot \epsilon}{3 \cdot k} = \epsilon.
+    \end{multline*}
+  \end{enumerate}
+\end{proof}
+
+\begin{example}
+  $\sum_{n=1}^{\infty} \frac{\sin (n\cdot x)}{n} = \sum_{n=1}^{\infty} \frac{1}{n} \cdot \sin (n\cdot x)$ \\
+
+  $a_n = \frac{1}{n}\rightarrow 0$ при $n\rightarrow\infty$. Оценим частичную сумму $\sum_{n=1}^{\infty}\sin (n\cdot x)$:
+  \begin{multline*}
+    \sin x + \sin (2\cdot x) + \sin (3\cdot x) + \ldots + \sin (n\cdot x) = \\
+    = \frac{1}{\sin \frac{x}{2}} \cdot \bigg(\sin x \cdot \sin \frac{x}{2} + \sin (2\cdot x) \cdot \sin\frac{x}{2}\bigg) = \\
+    = \frac{1}{2} \cdot \frac{1}{\sin\frac{x}{2}} \cdot \bigg(\cos \frac{x}{2} - \cos \frac{3\cdot x}{2} + \cdot \frac{3\cdot x}{2} - \cos \frac{5\cdot x}{2} + \ldots \\
+    \ldots + \cos \frac{(2\cdot n-1)\cdot x}{2} - \cos \frac{(2\cdot n+1) \cdot x}{2}\bigg) = \\
+    = \frac{1}{2} \cdot \frac{1}{\sin \frac{x}{2}} \cdot \bigg(\cos \frac{x}{2} - \cos \frac{(2\cdot n + 1) \cdot x}{2}\bigg) = \\
+    = \frac{2\cdot \sin \frac{(n+1)\cdot x}{2} \cdot \sin \frac{n\cdot x}{2}}{2\cdot \sin \frac{x}{2}}.
+  \end{multline*}
+
+  Тогда
+  \begin{equation*}
+    \bigg|\sum_{k=1}^{n} \sin (k\cdot x)\bigg| = \bigg|\frac{\sin\frac{(n+1)\cdot x}{2}\cdot \sin \frac{n \cdot x}{2}}{\sin \frac{x}{2}}\bigg| \leqslant \frac{1}{\sin\frac{x}{2}},
+  \end{equation*}
+  $\frac{x}{2} \ne \pi \cdot k, \ k \in \mathbb{Z} \implies x \ne 2 \cdot \pi \cdot k, \ k \in \mathbb{Z}$. \\
+
+  По признаку Дирихле ряд $\sum_{n=1}^{\infty}\frac{\sin (n\cdot x)}{n}$ сходится. 
+\end{example}
+
+\section{Свойства сходящихся рядов}
+
+Рассмотрим ряд
+\begin{equation*}
+  1-1+1-1+1-1+\ldots
+\end{equation*}
+
+Если
+\begin{equation*}
+  (1-1) + (1-1) + \ldots + (1-1) + \ldots,
+\end{equation*}
+\begin{equation*}
+  1 + (-1 + 1) + (-1 + 1) + \ldots
+\end{equation*}
+
+Пусть дан ряд
+\begin{equation*}
+  (A) \quad \sum_{n=1}^{\infty}a_n.
+\end{equation*}
+
+Составим из ряда $(A)$ ряд $(\widetilde{A})$:
+\begin{multline*}
+  \underbrace{(a_1 + a_2 + \ldots + a_{n_1})}_{\widetilde{a}_1} + \\
+  + \underbrace{(a_{n_1 + 1} + a_{n_1 + 2} + \ldots + a_{n_2})}_{\widetilde{a}_2} + \ldots + \underbrace{(a_{n_k + 1} + \ldots + a_{n_k + 1})}_{\widetilde{a}_{k+1}} + \ldots = \\
+  = \sum_{min}^{max}\sum_{min}^{max} a_n.
+\end{multline*}
+
+\begin{theorem}[сочетательное свойство сходящихся рядов]
+  \begin{enumerate}
+    \item Если ряд $(A)$ сходится, то для любой возрастающей последовательности $n_k$ ряд $(\widetilde{A})$ сходится и их суммы совпадают ($A = \widetilde{A}$);
+    \item Если ряд $(\widetilde{A})$ сходится и внутри каждой  скобки знак не меняется, то ряд $(A)$ сходится и их суммы совпадают, то есть $\widetilde{A} = A$.
+  \end{enumerate}
+\end{theorem}
 
 \end{document}
