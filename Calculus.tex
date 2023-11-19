@@ -12,6 +12,7 @@
 \usepackage{wrapfig}
 \usepackage{pgfplots}
 \usepackage[unicode, pdftex]{hyperref}
+\usepackage{mdsymbol}
 
 \pgfplotsset{compat=1.9}
 
@@ -698,7 +699,7 @@
     \end{array}\right., \ v = f(u)
   \end{equation}
 
-  Пусть точка $x_0$ соотуетствует параметру $t = 0$
+  Пусть точка $x_0$ соответствует параметру $t = 0$
   \begin{equation*}
     x(0) = \left\{\begin{array}{l}
       x' = x_0'                        \\
@@ -1725,11 +1726,11 @@ $\lambda = (\lambda^1,\ldots,\lambda^k), \ \lambda^i \in \mathbb{R}$ -- коэф
 \end{statement}
 
 \begin{proof}
-  $\leftarrow$ Пусть ряд $(A)$ абсолютно сходящийся, то есть сходится ряд $(A^*) \ \sum_{n=1}^{\infty}|a_n| \implies$ по критерию Коши $\forall \epsilon > 0 \ \exists N: \ \forall n > N \ \forall p > 0$
+  $"\impliedby"$ Пусть ряд $(A)$ абсолютно сходящийся, то есть сходится ряд $(A^*) \ \sum_{n=1}^{\infty}|a_n| \implies$ по критерию Коши $\forall \epsilon > 0 \ \exists N: \ \forall n > N \ \forall p > 0$
   \begin{equation*}
     |a_{n+1}| + |a_{n+1}| + \ldots + |a_{n+1}| < \epsilon
   \end{equation*}
-  $\rightarrow$ Пусть $\epsilon > 0$ задано. Рассмотрим
+  $"\implies"$ Пусть $\epsilon > 0$ задано. Рассмотрим
   \begin{equation*}
     |A_{n+p} - A_n| = |a_{n+1} + \ldots + a_{n+p}| \leqslant |a_{n+1}| + \ldots + |a_{n+p}| < \epsilon
   \end{equation*}
@@ -1850,30 +1851,30 @@ $\lambda = (\lambda^1,\ldots,\lambda^k), \ \lambda^i \in \mathbb{R}$ -- коэф
 
   \begin{enumerate}
     \item Пусть выполнены условия признака Абеля. Тогда $\exists M > 0: \ |a_n| \leqslant M$. Пусть $\epsilon > 0$ задано. Возьмем номер $N: \ \forall n > N, \ \forall p > 0$
-    \begin{equation*}
-      \bigg|\sum_{k=n+1}^{n+p}b_k\bigg| < \epsilon^* = \frac{\epsilon}{3\cdot M}.
-    \end{equation*}
+          \begin{equation*}
+            \bigg|\sum_{k=n+1}^{n+p}b_k\bigg| < \epsilon^* = \frac{\epsilon}{3\cdot M}.
+          \end{equation*}
 
-    Частичные суммы ряда $\sum_{n=1}^{\infty}a_n\cdot b_n$ имеют вид $S_n = a_1\cdot b_1 + \ldots + a_n \cdot b_n$. По критерию Коши найдем $N_1: \ \forall n > N_1, \forall p > 0$
-    \begin{equation*}
-      |S_{n+p} - S_n| < \epsilon,
-    \end{equation*}
-    \begin{multline*}
-      |a_{n+1} \cdot b_{n+1} + a_{n+2} \cdot b_{n+2} + \ldots + a_{n+p} \cdot b_{n+p}| \leqslant \\
-      \leqslant \epsilon^* \cdot (|a_{n+1}| + 2 \cdot |a_{n+p}|) \leqslant \epsilon^* \cdot 3 \cdot M = \frac{\epsilon}{3 \cdot M} = \epsilon \implies
-    \end{multline*}
-    $\implies$ по критерию Коши ряд $\sum_{n=1}^{\infty}a_n \cdot b_n$ сходится.
+          Частичные суммы ряда $\sum_{n=1}^{\infty}a_n\cdot b_n$ имеют вид $S_n = a_1\cdot b_1 + \ldots + a_n \cdot b_n$. По критерию Коши найдем $N_1: \ \forall n > N_1, \forall p > 0$
+          \begin{equation*}
+            |S_{n+p} - S_n| < \epsilon,
+          \end{equation*}
+          \begin{multline*}
+            |a_{n+1} \cdot b_{n+1} + a_{n+2} \cdot b_{n+2} + \ldots + a_{n+p} \cdot b_{n+p}| \leqslant \\
+            \leqslant \epsilon^* \cdot (|a_{n+1}| + 2 \cdot |a_{n+p}|) \leqslant \epsilon^* \cdot 3 \cdot M = \frac{\epsilon}{3 \cdot M} = \epsilon \implies
+          \end{multline*}
+          $\implies$ по критерию Коши ряд $\sum_{n=1}^{\infty}a_n \cdot b_n$ сходится.
 
     \item Пусть выполнены условия признака Дирихле. Так как $\underset{n\rightarrow\infty}{\lim}a_n = 0$, то $\exists N: \ \forall n > N \quad (\epsilon > 0$ задано):
-    \begin{equation*}
-      |a_n| < \frac{\epsilon}{3 \cdot k}, \quad \bigg|\sum_{k=1}^{n}b_k\bigg| \leqslant k.
-    \end{equation*}
+          \begin{equation*}
+            |a_n| < \frac{\epsilon}{3 \cdot k}, \quad \bigg|\sum_{k=1}^{n}b_k\bigg| \leqslant k.
+          \end{equation*}
 
-    По критерию Коши:
-    \begin{multline*}
-      |S_{n+p} - S_n| = |a_{n+1} \cdot b_{n+1} + \ldots + a_{n+p} \cdot b_{n+p}| \overset{by \ lemma}{\leqslant} \\
-      \leqslant k\cdot(|a_{n+1}| + 2\cdot |a_{n+p}|) < k\cdot \frac{3\cdot \epsilon}{3 \cdot k} = \epsilon.
-    \end{multline*}
+          По критерию Коши:
+          \begin{multline*}
+            |S_{n+p} - S_n| = |a_{n+1} \cdot b_{n+1} + \ldots + a_{n+p} \cdot b_{n+p}| \overset{by \ lemma}{\leqslant} \\
+            \leqslant k\cdot(|a_{n+1}| + 2\cdot |a_{n+p}|) < k\cdot \frac{3\cdot \epsilon}{3 \cdot k} = \epsilon.
+          \end{multline*}
   \end{enumerate}
 \end{proof}
 
@@ -1896,7 +1897,7 @@ $\lambda = (\lambda^1,\ldots,\lambda^k), \ \lambda^i \in \mathbb{R}$ -- коэф
   \end{equation*}
   $\frac{x}{2} \ne \pi \cdot k, \ k \in \mathbb{Z} \implies x \ne 2 \cdot \pi \cdot k, \ k \in \mathbb{Z}$. \\
 
-  По признаку Дирихле ряд $\sum_{n=1}^{\infty}\frac{\sin (n\cdot x)}{n}$ сходится. 
+  По признаку Дирихле ряд $\sum_{n=1}^{\infty}\frac{\sin (n\cdot x)}{n}$ сходится.
 \end{example}
 
 \section{Свойства сходящихся рядов}
@@ -1921,15 +1922,955 @@ $\lambda = (\lambda^1,\ldots,\lambda^k), \ \lambda^i \in \mathbb{R}$ -- коэф
 
 Составим из ряда $(A)$ ряд $(\widetilde{A})$:
 \begin{multline*}
-  \underbrace{(a_1 + a_2 + \ldots + a_{n_1})}_{\widetilde{a}_1} + \\
-  + \underbrace{(a_{n_1 + 1} + a_{n_1 + 2} + \ldots + a_{n_2})}_{\widetilde{a}_2} + \ldots + \underbrace{(a_{n_k + 1} + \ldots + a_{n_k + 1})}_{\widetilde{a}_{k+1}} + \ldots = \\
-  = \sum_{min}^{max}\sum_{min}^{max} a_n.
+  \underbrace{(a_1 + a_2 + \ldots + a_{n_1})}_{\widetilde{a}_1} + \underbrace{(a_{n_1 + 1} + a_{n_1 + 2} + \ldots + a_{n_2})}_{\widetilde{a}_2} + \ldots \\
+  \ldots + \underbrace{(a_{n_k + 1} + \ldots + a_{n_k + 1})}_{\widetilde{a}_{k+1}} + \ldots = (\widetilde{A}) \quad \sum_{k=1}^{\infty}\sum_{l=n_{k-1}+1}^{n_k} a_l, \quad a_{n_0} = a_1.
 \end{multline*}
 
 \begin{theorem}[сочетательное свойство сходящихся рядов]
   \begin{enumerate}
     \item Если ряд $(A)$ сходится, то для любой возрастающей последовательности $n_k$ ряд $(\widetilde{A})$ сходится и их суммы совпадают ($A = \widetilde{A}$);
     \item Если ряд $(\widetilde{A})$ сходится и внутри каждой  скобки знак не меняется, то ряд $(A)$ сходится и их суммы совпадают, то есть $\widetilde{A} = A$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть ряд $(A)$ сходится, $\widetilde{A}_k$ -- частичные суммы ряда $(\widetilde{A})$:
+          \begin{equation*}
+            \begin{array}{l}
+              \widetilde{A}_1 = \widetilde{a}_1 = \sum_{k=1}^{n_1}a_k = A_{n_1}                         \\
+              \widetilde{A}_2 = \widetilde{a}_1 + \widetilde{a}_2 = \sum_{k=n_1 + 1}^{n_2}a_k = A_{n_1} \\
+              \vdots                                                                                    \\
+              \widetilde{A}_k = A_{n_k}
+            \end{array}
+          \end{equation*}
+
+          Так как ряд $(A)$ сходится, то существует
+          \begin{equation*}
+            \underset{k\rightarrow\infty}{\lim}A_{n_k} = A \implies A = \underset{k\rightarrow\infty}{\lim}A_{n_k} = \underset{n\rightarrow\infty}{\lim}\widetilde{A}_k = \widetilde{A}
+          \end{equation*}
+
+    \item Пусть ряд $(\widetilde{A})$ сходится. Имеем, при
+          \begin{eqnarray*}
+            a_1 > 0: \quad A_1 < A_2 < \ldots < A_{n_1} \\
+            a_1 < 0: \quad A_1 > A_2 > \ldots > A_{n_1}
+          \end{eqnarray*}
+
+          \begin{itemize}
+            \item Далее, если $a_{n_1 + 1} > 0$, тогда при
+                  \begin{equation*}
+                    a_1 > 0: \quad A_{n_1 + 1} < A_{n_1 + 2} < \ldots < A_{n_2} \implies
+                  \end{equation*}
+                  $\implies A_{n_1} = \widetilde{A}_1 < A_{n_2} = \widetilde{A}_2$, при $a_1 < 0 \implies A_{n_1} < 0$ и $A_{n_1} < A_{n_2} \implies \widetilde{A}_1 < \widetilde{A}_2$ если $a_{n_1 + 1} < 0$.
+
+            \item Если же $a_{n_1 + 1} < 0$, тогда при
+                  \begin{eqnarray*}
+                    a_1 < 0: & \quad A_{n_1} = & \widetilde{A}_1 > A_{n_2} = \widetilde{A}_2 \\
+                    a_1 > 0: & \quad A_{n_1} = & \widetilde{A}_1 > \widetilde{A}_2
+                  \end{eqnarray*}
+          \end{itemize}
+
+          Аналогично, пока $n$ меняется от $n_k$ до $n_{k+1}$, то будем иметь либо $A_{n_k} < A_n < A_{n_{k+1}}$, либо $A_{n_k} > A_n > A_{n_{k+1}}$.
+
+          Ряд $(\widetilde{A})$ -- сходится $\implies \exists \underset{k\rightarrow\infty}{\lim}\widetilde{A}_k = \underset{k\rightarrow\infty}{\lim}\widetilde{A}_{k+1} = \widetilde{A} \implies$ по теореме о 2-х миллиционерах:
+          \begin{equation*}
+            \underset{k\rightarrow\infty}{\lim}A_n = \widetilde{A}
+          \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[переместительное свойство сходящихся рядов]
+  Если ряд $(A) \quad \sum_{n=1}^{\infty}a_n$ абсолютно сходится, то его сумма не зависит от перестановки членов ряда.
+\end{theorem}
+
+\begin{proof}[Доказательство теоремы]
+  Пусть ряд
+  \begin{equation*}
+    (A) \quad \sum_{n=1}^{\infty} a_n
+  \end{equation*}
+  сходится абсолютно $\implies$ ряд
+  \begin{equation*}
+    (A^*) \quad \sum_{n=1}^{\infty}|a_n|
+  \end{equation*}
+  сходится. Пусть ряд
+  \begin{equation*}
+    (A') \quad \sum_{n=1}^{\infty}a_n'
+  \end{equation*}
+  получен из ряда $(A)$ путем перестановки его членов. Покажем, что ряд $(A')$ сходится и $A = A'$ (их суммы совпадают).
+
+  \begin{enumerate}
+    \item Пусть $(A)$ -- знакоположительный, то есть $\forall n \in \mathbb{N} \quad a_n > 0$. Рассмотрим частичные суммы ряда $(A')$:
+          \begin{equation*}
+            A_k' = a_1' + a_2' + \ldots + a_k' = a_{n_1} + a_{n_2} + \ldots + a_{n_k}.
+          \end{equation*}
+
+          Пусть $n' = \max\{n_1,n_2,\ldots,n_k\}$. Тогда
+          \begin{equation*}
+            A_k' \leqslant a_1 + a_2 + \ldots + a_{n_j} + \ldots + a_{n'} = A_{n'},
+          \end{equation*}
+          где $A_{n'}$ -- $n'$-я частичная сумма ряда $(A)$. Так как $(A)$ сходится и знакоположительный $\implies A_{n'} \leqslant A$.
+
+          Таким образом получаем, что $\forall k \quad A_k' \leqslant A \implies$ последовательность $A_k' \nearrow$ и ограничена $\implies$
+          \begin{equation*}
+            \exists\underset{k\rightarrow\infty}{\lim}A_k' = A' \leqslant A.
+          \end{equation*}
+
+          С другой стороны, ряд $(A')$ получен перестановкой членов ряда $(A) \implies A' \geqslant A \implies A' \leqslant A \leqslant A' \implies A = A'$.
+
+    \item Пусть ряд $(A)$ сходится абсолютно, то есть $(A^*) \quad \sum_{n=1}^{\infty} |a_n|$ сходится. С рядом $(A)$ свяжем два ряда:
+          \begin{equation*}
+            (P) \ \sum_{n=1}^{\infty}p_n, \quad (Q) \ \sum_{n=1}^{\infty}q_n,
+          \end{equation*}
+          где $p_n$ -- положительные члены ряда $(A)$, $q_n$ -- отрицательные члены ряда $(A)$, взятые по модулю, причем все члены рядов $(P)$ и $(Q)$ взяты в том же порядке, как они стояли в ряде $(A)$.
+  \end{enumerate}
+
+  \begin{lemma}
+    Если ряд $(A)$ абсолютно сходящийся, то ряды $(P)$ и $(Q)$ сходятся и $A = P - Q$.
+  \end{lemma}
+
+  \begin{proof}[Доказательство леммы]
+    Пусть $(A^*) \quad \sum_{n=1}^{\infty}|a_n|$ -- сходится $\implies \sum_{n=1}^{\infty}|a_n| = A^*$. $A_n^*$ -- частичные суммы ряда $(A^*)$. Имеем $P_{n_k} = a_{n_1} + a_{n_2} + \ldots + a_{n_k}$, где $n_1 < n_2 < \ldots < n_k \leqslant n, \quad P_{n_k} \leqslant A_n^*$,
+    \begin{eqnarray*}
+      & (A) & \ \sum_{n=1}^{\infty} a_n = a_1 + a_2 + a_3 + a_4 + a_5 + a_6 \\
+      & (P) & \ \sum_{n=1}^{\infty} p_n = \underbrace{a_1 + a_3 + a_4 + a_6}_{P_3} \\
+      & (A^*) & \ \underbrace{|a_1| + |a_2| + |a_3| + |a_4| + |a_5|}_{A_5^*} + \ldots
+    \end{eqnarray*}
+    и $Q_{n_m} \leqslant A_n^* \implies$ (так как $(A)^*$ сходится) $\implies A_n^* \leqslant A^* \leftarrow$ сумма ряда $(A^*)$ и $\implies P_{n_k}\leqslant A^*$ и $Q_{n_m} \leqslant A^*$.
+
+    Далее, $A_n = P_{n_k} - Q_{n_m}$, где $n_k \leqslant n, \ n_m \leqslant n$. При $n\rightarrow\infty \implies k \rightarrow\infty, \ m \rightarrow\infty$.
+
+    Далее, так как $(A)$ сходится абсолютно $\implies (A)$ сходится $\implies$
+    \begin{multline*}
+      \implies \exists A = \underset{n\rightarrow\infty}{\lim}A_n = \underset{\underset{k\rightarrow\infty}{m\rightarrow\infty}}{\lim}(P_{n_k} - Q_{n_m}) = \\
+      = \underset{k\rightarrow\infty}{\lim}P_{n_k} - \underset{m\rightarrow\infty}{\lim}Q_{n_m} = P - Q.
+    \end{multline*}
+  \end{proof}
+
+  Если ряд $(A)$ сходится абсолютно, то сходится ряд $(A^*)$, $(A^*)$ -- положительный ряд $\implies (A^{*'})$ сходится (получен путем перестановки членов ряда $(A^*)$) $\implies$ по лемме сходятся ряды $(P')$ и $(Q')$ \\
+
+  {\Large ТУТ ХИМИЧЕСКИЕ ФОРМУЛЫ} \\
+
+  и $A' = P' - Q'$.
+
+  \begin{itemize}
+    \item $P'$ -- положительный ряд $\implies$ по пункту 1, $P$ -- сходится;
+    \item $Q'$ -- положительный ряд $\implies$ по пункту 1, $Q$ -- сходится
+  \end{itemize}
+  и $P' = P, \quad Q' = Q \implies A' = P - Q = A$.
+\end{proof}
+
+\begin{theorem}[Римана о перестановке членов условно сходящегося ряда]
+  Если ряд $(A)$ условно сходится, то $\forall B \in \mathbb{R}$ (в том числе $B = \pm\infty$) $\exists$ перестановка ряда $(A)$ такая, что полученный ряд сходится и имеет сумму $B$. Более того, $\exists$ перестановка ряда $(A)$ такая, что частичные суммы полученного ряда не стремятся ни к конечному, ни к бесконечному пределу.
+\end{theorem}
+
+\begin{proof}[Доказательство теоремы]
+  \begin{lemma}
+    Если ряд $(A)$ сходится условно, то ряды $(P)$ и $(Q)$ расходятся.
+  \end{lemma}
+
+  \begin{proof}[Доказательство леммы]
+    Рассмотрим $A_n = P_k - Q_m$, где $k \leqslant n, \ m \leqslant n \ (k + m = n)$
+    \begin{eqnarray*}
+      A_n^* = P_k^* + Q_m^* \quad (k + m = n), \\
+      \underset{n\rightarrow\infty}{\lim} A_n = A; \quad \underset{n\rightarrow\infty}{\lim}A_n^* = \infty.
+    \end{eqnarray*}
+
+    Допустим, что ряд $(P)$ сходится $\implies (P^*)$ сходится, а так же $\exists \underset{k\rightarrow\infty}{\lim}P_k = P \implies \exists\underset{m\rightarrow\infty}{\lim}Q_m = A - P \overset{from \ (*)}{\implies} Q^*$ -- сходится $\implies A^*$ имеет предел. Противоречие $\implies P$ расходится.
+
+    Для $Q$ -- аналогично.
+  \end{proof}
+
+  Пусть $B \in \mathbb{R}$. Возьмем номер $n_1: \ p_1 + p_2 + \ldots + p_{n_1} \geqslant B$. Выберем $n_2: \ p_1 + p_2 + \ldots + p_{n_1} - q_1 - q_2 - \ldots - q_{n_2} \leqslant B$.
+
+  Более того, элементы $p$ и $q$ будем брать столько, сколько это необходимо для выполнения этого условия.
+
+  Возьмем $n_3: \ p_1 + p_2 + \ldots + p_{n_1} - q_1 - q_2 - \ldots - q_{n_2} + p_{n_1 + 1} + p_{n_1 + 2} + \ldots + p_{n_3} \geqslant B$ и так далее.
+
+  Таким образом получим ряд $(p_1 + \ldots + p_{n_1}) + (-q_1 - \ldots - q_{n_2}) + (p_{n_1 + 1} + \ldots + p_{n_3}) + (-q_{n_2 + 1} - \ldots - q_{n_4}) + \ldots$ -- этот ряд сходится к $B$.
+
+  Действительно, так как ряд $(A)$ сходится, то $\underset{n\rightarrow\infty}{\lim} a_n = 0$.
+
+  Так как количество членов $p_i$ и $q_i$ бралось лишь столько, сколько необходимо, то соответствующие частичные суммы отличаются от $B$ разве что на последнее слогаемое в этой частичной сумме, которое стремится к нулю $\implies \underset{n\rightarrow\infty}{\lim}A_n' = B$.
+\end{proof}
+
+\section{Умножение рядов}
+
+Пусть даны ряды
+\begin{equation*}
+  (A) \ \sum_{n=1}^{\infty}a_n, \quad (B) \ \sum_{n=1}^{\infty}b_n.
+\end{equation*}
+
+Составим таблицу:
+\begin{center}
+  \begin{tabular}{c | c | c | c | c | c}
+             & $a_1$     & $a_2$      & $\cdots$ & $a_n$     & $\cdots$ \\
+    \hline
+    $b_1$    & $a_1 b_1$ & $a_2 b_1 $ & $\cdots$ & $a_n b_1$ & $\cdots$ \\
+    \hline
+    $b_2$    & $a_1 b_2$ & $a_2 b_2$  & $\cdots$ & $a_n b_2$ & $\cdots$ \\
+    \hline
+    $\vdots$ & $\vdots$  & $\vdots$   & $\ddots$ & $\cdots$  & $\cdots$ \\
+    \hline
+    $b_n$    & $a_1 b_n$ & $a_2 b_n$  & $\vdots$ & $a_n b_n$ & $\cdots$ \\
+    \hline
+    $\vdots$ & $\vdots$  & $\vdots$   & $\vdots$ & $\vdots$  & $\ddots$ \\
+  \end{tabular}
+\end{center}
+
+\begin{definition}[произведение рядов, форма Коши]
+  \textbf{Произведением рядов} $(A)$ и $(B)$ назовем ряд, членами которого ялвяются элементы на строке таблицы $a_ib_j$, взятые в произвольном порядке.
+
+  Если числа выбираются по диагоналям, то произведение называется \textbf{формой Коши}:
+  \begin{equation*}
+    a_1 b_1 + (a_1 b_2 + a_2 b_1) + \ldots
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}[Коши о произведении рядов]
+  Если ряды
+  \begin{equation*}
+    (A) \ \sum_{n=1}^{\infty}a_n, \quad (B) \ \sum_{n=1}^{\infty}b_n
+  \end{equation*}
+  абсолютно сходятся, $A$ и $B$ -- их суммы, то $\forall$ их произведение абсолютно сходится и равно $A \cdot B$.
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим $r$-тую частичную сумму ряда
+  \begin{equation*}
+    (A\cdot B)^* \quad \sum_{r=1}^{\infty}|a_{n_r}\cdot b_{k_r}|,
+  \end{equation*}
+  \begin{multline*}
+    S_r = |a_{n_1} \cdot b_{k_1}| + |a_{n_2} \cdot b_{k_2}| + \ldots + |a_{n_r} \cdot b_{k_r}| \leqslant \\
+    \leqslant (|a_{n_1}| + |a_{n_2}| + \ldots + |a_{n_r}|) \cdot (|b_{k_1}| + |b_{k_2}| + \ldots + |b_{k_r}|) \leqslant \\
+    \leqslant (|a_1| + |a_2| + \ldots + |a_m|) \cdot (|b_1| + |b_2| + \ldots + |b_m|),
+  \end{multline*}
+  где $m = \max\{n_1,n_2,\ldots,n_r,k_1,k_2,\ldots,k_r\}$.
+
+  Так как ряды $(A)$ и $(B)$ сходятся абсолютно, то есть сходятся ряды $(A^*)$ и $(B^*)$, то $S_r \leqslant A^* \cdot B^* \implies$ последовательность $S_r \nearrow$ и ограничена $\implies \exists \underset{r\rightarrow\infty}{\lim} S_r \implies$ ряд $(A\cdot B)^*$ сходится $\implies$ ряд
+  \begin{equation*}
+    (A\cdot B) \quad \sum_{r=1}^{\infty}a_{n_r}\cdot b_{k_r}
+  \end{equation*} -- сходится, причем его сумма не зависит от порядка суммирования.
+
+  Будем суммировать ряд $A\cdot B$ по квадратам
+  \begin{equation*}
+    \underbrace{a_1b_1}_{c_1} + \underbrace{(a_1b_2 + a_2 b_2 + a_2 b_1)}_{c_2} + \underbrace{(a_1b_3 + a_2b_3 + a_3b_3 + a_3b_2 + b_3b_1)}_{c_3} + \ldots
+  \end{equation*}
+  \begin{equation*}
+    \begin{array}{l}
+      S_1 = a_1b_1 = A_1\cdot B_1                                                                        \\
+      S_2 = c_1 + c_2 = a_1b_1 + (a_1b_2 + a_2b_2 + a_2b_1) = (a_1 + a_2)\cdot(b_1 + b_2) = A_2\cdot B_2 \\
+      S_3 = c_1 + c_2 + c_3 = (a_1 + a_2 + a_3)\cdot(b_1 + b_2 + b_3) = A_3\cdot b_3                     \\
+      \vdots                                                                                             \\
+      S_n = A_n \cdot B_n
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}S_n = \underset{n\rightarrow\infty}{\lim}(A_n \cdot B_n) = \underset{n\rightarrow\infty}{\lim}A_n \cdot \underset{n\rightarrow\infty}{\lim}B_n = A\cdot B
+  \end{equation*}
+\end{proof}
+
+\section{Двойные и повторные ряды}
+
+Рассмотрим таблицу $(\star)$
+\begin{center}
+  \begin{tabular}{c | c | c | c | c | c}
+    $a_{11}$ & $a_{12}$ & $a_{13}$ & $\cdots$ & $a_{1k}$ & $\cdots$ \\
+    \hline
+    $a_{21}$ & $a_{22}$ & $a_{23}$ & $\cdots$ & $a_{2k}$ & $\cdots$ \\
+    \hline
+    $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\cdots$ & $\cdots$ \\
+    \hline
+    $a_{n1}$ & $a_{n2}$ & $a_{n3}$ & $\vdots$ & $a_{nk}$ & $\cdots$ \\
+    \hline
+    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ \\
+  \end{tabular}
+\end{center}
+
+\begin{definition}[повторный ряд]
+  \textbf{Повторным рядом} называется выражение
+  \begin{equation}
+    \sum_{n=1}^{\infty}\sum_{k=1}^{\infty}a_{nk},
+  \end{equation}
+  \begin{equation}
+    \sum_{k=1}^{\infty}\sum_{n=1}^{\infty}a_{nk}.
+  \end{equation}
+
+  Говорят, что ряд $(2.7)$ сходится, если сходятся все ряды $(A_n)$ по строкам $(\sum_{k=1}^{\infty}a_{n_k} = A_n)$ и сходится ряд
+  \begin{equation*}
+    \sum_{n=1}^{\infty}A_n.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  \textbf{Двойным рядом} называется выражение
+  \begin{equation}
+    \sum_{n,k = 1}^{\infty} a_{nk}
+  \end{equation}
+
+  Говорят, что ряд $(2.9)$ сходится, если $\exists$
+  \begin{equation*}
+    A = \underset{\begin{array}{c}
+        N\rightarrow\infty \\
+        K\rightarrow\infty
+      \end{array}}{\lim} = \underset{\begin{array}{c}
+        N\rightarrow\infty \\
+        K\rightarrow\infty
+      \end{array}}{\lim}\sum_{n=1}^{N}\sum_{k=1}^{K}a_{nk}.
+  \end{equation*}
+
+  То есть $\forall \epsilon > 0 \ \exists N_0$ и $K_0: \ \forall N > N_0$ и $\forall k > K_0$
+  \begin{equation*}
+    \bigg|\underbrace{\sum_{n=1}^{N}\sum_{k=1}^{K}a_{nk}}_{A_{NK}} - A\bigg| < \epsilon
+  \end{equation*}
+\end{definition}
+
+\begin{definition}[простой ряд]
+  Пусть ряд
+  \begin{equation}
+    (U) \quad \sum_{r=1}^{\infty}U_r
+  \end{equation}
+  построен из элементов таблицы, взятых в произвольном порядке. Такой ряд будем называть \textbf{простым}, связанным с данной таблицей.
+\end{definition}
+
+\begin{theorem}["Главная"]
+  Пусть дана таблица
+  \begin{center}
+    \begin{tabular}{c | c | c | c | c | c}
+      $a_{11}$ & $a_{12}$ & $a_{13}$ & $\cdots$ & $a_{1k}$ & $\cdots$ \\
+      \hline
+      $a_{21}$ & $a_{22}$ & $a_{23}$ & $\cdots$ & $a_{2k}$ & $\cdots$ \\
+      \hline
+      $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\cdots$ & $\cdots$ \\
+      \hline
+      $a_{n1}$ & $a_{n2}$ & $a_{n3}$ & $\vdots$ & $a_{nk}$ & $\cdots$ \\
+      \hline
+      $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ \\
+    \end{tabular}
+  \end{center}
+  и по ней построены ряды
+  \begin{equation*}
+    \sum_{n=1}^{\infty}\sum_{k=1}^{\infty}a_{nk}, \quad \sum_{k=1}^{\infty}\sum_{n=1}^{\infty}a_{nk}, \quad \sum_{n,k = 1}^{\infty} a_{nk}, \quad \sum_{r=1}^{\infty}U_r.
+  \end{equation*}
+
+  Если после замены элементов таблицы их модулями хотя бы один из 4-х рядов становится сходящимся, то сходятся остальные и их суммы равны.
+\end{theorem}
+
+\begin{theorem}[о связи сходимости простого и повторного рядов]
+  \begin{enumerate}
+    \item Если ряд
+          \begin{equation*}
+            \sum_{r=1}^{\infty}U_r
+          \end{equation*}
+          абсолютно сходится, то ряд
+          \begin{equation*}
+            \sum_{n=1}^{\infty}\sum_{k=1}^{\infty}a_{nk}
+          \end{equation*}
+          сходится и его сумма равна $U$.
+
+    \item Если после замены элементов таблицы $(\star)$ их модулями ряд
+          \begin{equation*}
+            \sum_{n=1}^{\infty}\sum_{k=1}^{\infty}|a_{nk}|
+          \end{equation*}
+          сходится, то ряд
+          \begin{equation*}
+            \sum_{r=1}^{\infty}U_r
+          \end{equation*}
+          сходится абсолютно и суммы рядов
+          \begin{equation*}
+            \sum_{n=1}^{\infty}\sum_{k=1}^{\infty}a_{nk} \quad \& \quad \sum_{r=1}^{\infty}U_r
+          \end{equation*}
+          совпадают.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть $(U^*)$ сходится. Покажем, что все ряды по строкам сходятся
+          \begin{equation*}
+            (A_n) \quad \sum_{k=1}^{\infty}a_{nk} \quad (\forall n \in \mathbb{N})
+          \end{equation*}
+          и сходится ряд
+          \begin{equation*}
+            \sum_{n=1}^{\infty}A_n.
+          \end{equation*}
+
+          Рассмотрим
+          \begin{equation*}
+            |a_{n1}| + |a_{n2}| + \ldots + |a_{nk}| \leqslant |u_1| + |u_2| + \ldots + |u_r|,
+          \end{equation*}
+          где $r$ выбран таким образом, чтобы среди $|u_i|$ были все слагаемые $|a_{n1}, \ldots, a_{nk}|$.
+
+          Таким образом,
+          \begin{equation*}
+            \underbrace{|a_{n1}| + \ldots + |a_{nk}|}_{A_{nk}^*} \leqslant U^* \implies \exists \underset{k\rightarrow\infty}{\lim}A_{nk}^* = A_n^* \implies
+          \end{equation*}
+          $\implies$ ряд $\sum_{k=1}^{\infty}a_{nk} \ \forall n \in \mathbb{N}$ сходится абсолютно $\implies$ он сходится.
+
+          Далее, пусть $\epsilon > 0$ задано. Выберем номер $r_0: \ \forall r > r_0$
+          \begin{equation*}
+            \sum_{i=1}^{\infty}|u_{r+i}| < \frac{\epsilon}{3}.
+          \end{equation*}
+
+          Тогда
+          \begin{equation*}
+            \bigg|\sum_{i=1}^{r} u_i - U\bigg| = \bigg| \sum_{i=1}^{\infty}u_{r + i}\bigg| \leqslant \sum_{i=1}^{\infty}|u_{r + i}| < \frac{\epsilon}{3}
+          \end{equation*}
+
+          Так как ряды по строкам сходятся, то $\forall n$ выберем $m(n)$:
+          \begin{equation*}
+            \bigg|\sum_{k=1}^{m(n)}a_{n_k} - A_n\bigg| < \frac{\epsilon}{3 \cdot 2^n}.
+          \end{equation*}
+
+          Наконец, выберем номер $N_0$ такой, что все числа $u_1, u_2,\ldots, u_{r_0}$ содержались бы в первых $N_0$ строчках.
+
+          \begin{multline*}
+            \bigg|\sum_{n=1}^{N}A_n - U\bigg| = \\
+            = \bigg|\sum_{n=1}^{N_0}A_n - \sum_{n=1}^{N_0}\sum_{k=1}^{m(n)}a_{n_k} + \sum_{n=1}^{N_0}\sum_{k=1}^{m(n)}a_{n_k} - \sum_{i=1}^{r_0}u_i + \sum_{i=1}^{r_0}u_i - U\bigg| \leqslant \\
+            \leqslant \sum_{n=1}^{N_0}\bigg|A_n - \sum_{k=1}^{m(n)}a_{n_k}\bigg| + \bigg|\sum_{n=1}^{N_0}\sum_{k=1}^{m(n)}a_{n_k} - \sum_{i=1}^{r_0}u_i\bigg| + \underbrace{\bigg|\sum_{i=1}^{r_0}u_i - U\bigg|}_{<\frac{\epsilon}{3}} < \\
+            < \frac{\epsilon}{3} + \sum_{i=r_0 + 1}^{\infty}(u_i) + \frac{\epsilon}{3} < \frac{\epsilon}{3} \cdot 3 = \epsilon.
+          \end{multline*}
+
+    \item Пусть ряд $\sum_{n=1}^{\infty}\sum_{k=1}^{\infty}|a_{n_k}| = A^*$ сходится.
+
+          Тогда $\forall r \ \exists N,K$ такие, что числа $u_1,\ldots,u_r$ содержатся в $N$ первых строчках и $K$ первых столбцах таблицы
+          \begin{equation*}
+            \sum_{i=1}^{r}|u_i| \leqslant \sum_{n=1}^{N}\sum_{k=1}^{K}|a_{n_k}| \leqslant A^* \implies
+          \end{equation*}
+          $\implies |u_r|\nearrow$ и ограничен $\implies$ ряд $(U)$ сходится абсолютно $\implies$ по пункту 1., суммы рядов $(U)$ и $(???)$ равны.
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[свойства двойных рядов]
+  \begin{enumerate}
+    \item Если ряд
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}a_{nk}
+          \end{equation*}
+          сходится, то
+          \begin{equation*}
+            \underset{k\rightarrow\infty}{\underset{n\rightarrow\infty}{\lim}}a_{nk} = 0
+          \end{equation*}
+
+    \item (Критерий Коши)
+          Ряд
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}a_{nk}
+          \end{equation*}
+          сходится тогда и только тогда, когда $\forall \epsilon > 0 \ \exists N_0,K_0: \ \forall n > N_0, \ \forall k > K_0, \ \forall p > 0, \ \forall q > 0$
+          \begin{equation*}
+            \bigg|\sum_{n=1}^{p}\sum_{k=1}^{q}a_{(N_0 + n)(K_0 + k)}\bigg| < \epsilon.
+          \end{equation*}
+
+    \item Если ряд
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}a_{nk}
+          \end{equation*}
+          сходится, то $\forall c \in \mathbb{R}$ ряд
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}(c\cdot a_{nk})
+          \end{equation*}
+          сходится, и его сумма равна $c\cdot A$ (где $A = \sum_{n,k=1}^{\infty}a_{nk}$).
+
+    \item Если ряд
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}a_{nk}
+          \end{equation*}
+          сходится и ряд
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}b_{nk}
+          \end{equation*}
+          сходится, то
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}(a_{nk} + b_{nk}) = A + B,
+          \end{equation*}
+          а к тому же -- сходится.
+
+    \item Если $\forall n, \ \forall k \ a_{nk} \geqslant 0$, то ряд
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}a_{nk}
+          \end{equation*}
+          сходится тогда и только тогда, когда его частичные суммы ограничены в совокупности.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Пусть ряд
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}a_{nk}
+          \end{equation*}
+          сходится. Заметим, что
+          \begin{equation*}
+            A_{nk} = \sum_{i,j=1}^{n,k},
+          \end{equation*}
+          \begin{equation*}
+            a_{nk} = A_{nk} - A_{n(k-1)} - A_{(n-k)k} + A_{(n-1)(k-1)} \implies a_{nk} \rightarrow 0.
+          \end{equation*}
+
+    \item (Критерий Коши)
+          На декартовом произведении $\mathbb{N}\times\mathbb{N}$ введем базу:
+          \begin{equation*}
+            B_{nk} = \{(n,k): \ n > N_0, \ k > K_0\}.
+          \end{equation*}
+
+          Тогда критерий Коши сходимости ряда -- это есть критерий Коши существования предела функции $A_{nk}$ по данной базе.
+
+    \item Самостоятельно.
+
+    \item Самостоятельно.
+
+    \item $"\rightarrow"$ Очевидно.
+
+          $"\leftarrow"$ Пусть множество $\{A_{nk}\}$ -- ограничено. Пусть $A = \sup\{A_{nk}\}$. Покажем, что $A$ -- сумма ряда
+          \begin{equation*}
+            \sum_{n,k=1}^{\infty}a_{nk}.
+          \end{equation*}
+
+          Пусть $\epsilon > 0$ задано. Выберем $N_0$ и $K_0$:
+          \begin{equation*}
+            A - A_{N_0 K_0} < \epsilon
+          \end{equation*}
+
+          ДОПИСАТЬ!!!
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[о связи сходимости двойного и простого рядов]
+  Если ряд $\sum_{n,k=1}^{\infty}|a_{nk}|$ сходится, то сходится ряд $\sum_{r=1}^{\infty}u_r$.
+
+  И наоборот, если сходится ряд $\sum_{r=1}^{\infty}|u_r|$, то сходится ряд $\sum_{n,k=1}^{\infty}a_{nk}$.
+
+  И в обоих случаях суммы рядов равны:
+  \begin{equation*}
+    \sum_{n,k=1}^{\infty}a_{nk} = \sum_{r=1}^{\infty}u_r
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  $"\implies"$ Пусть двойной ряд сходится абсолютно, то есть сходится ряд $\sum_{n,k=1}^{\infty}|a_{nk}|$.
+
+  Тогда для любого номера $S \ \exists N,K$ такие, что все числа $u_1,\ldots,u_S$ содержатся в первых $N$ строках и первых $K$ столбцах, тогда:
+  \begin{equation*}
+    |u_1| + |u_2| + \ldots + |u_S| \leqslant \sum_{n=1}^{N}\sum_{k=1}^{K}|a_{nk}| \leqslant A^* = \sum_{n,k=1}^{\infty}|a_{nk}| \implies
+  \end{equation*}
+  $\implies$ последовательность $U_i^* \nearrow$ и ограничена $\implies$ ряд $\sum_{r=1}^{\infty}u_r$ сходится абсолютно $\implies$ сходится.
+
+  $"\impliedby"$ Пусть ряд $\sum_{r=1}^{\infty}|u_r|$ сходится $\implies \forall N,K \ \exists S:$ все числа $a_{11},a_{12},\ldots,a_{1K},a_{21},\ldots,a_{2K},\ldots,a_{N1},\ldots,a_{NK}$ содержатся среди чисел $u_1,\ldots,u_S$. Тогда
+  \begin{equation*}
+    A_{NK}^* = \sum_{n=1}^{N}\sum_{k=1}^{K}|a_{nk}| \leqslant\sum_{r=1}^{S}|u_r| \leqslant U^* = \sum_{r=1}^{\infty}|u_r| \implies
+  \end{equation*}
+  $\implies$ ряд $\sum_{n,k=1}^{\infty}a_{nk}$ сходится.
+
+  Покажем, что $\sum_{n,k=1}^{\infty}a_{nk} = \sum_{r=1}^{\infty}u_r$.
+
+  Так как ряд $\sum_{r=1}^{\infty}u_r$ сходится абсолютно, то расположим элементы по квадратам:
+  \begin{equation*}
+    \begin{array}{l}
+      a_{11} = u_{r_1}                                       \\
+      a_{12} + a_{22} + a_{21} = u_{r_2} + u_{r_3} + u_{r_4} \\
+      \vdots                                                 \\
+      A_{nn} = a_{11} + \ldots + a_{nn} = U_n = u_{r_1} + \ldots + u_{r_n}
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    A = \underset{n\rightarrow\infty}{\lim}A_{nn} = \underset{n\rightarrow\infty}{\lim}U_n = U
+  \end{equation*}
+\end{proof}
+
+\begin{proof}[Доказательство "Главной"]
+  Из четырех предыдущих теорем $\implies$ "Главная"  теорема.
+\end{proof}
+
+\section{Поточечная и равномерная сходимость семейства функций}
+
+\begin{definition}
+  \textbf{Семейство функций} -- это произвольное множество функций.
+
+  Пусть $f:X\times T \rightarrow Y$. Если по каким-либо соображениям элементам множества $T$ уделяется особое внимание, то будем их называть \textbf{параметрами}.
+
+  То есть $\forall t \in T$ можно рассмотреть функцию
+  \begin{equation*}
+    f_t(x) = f(x,t).
+  \end{equation*}
+
+  В этом случае будем говорить, что задано семейство функций, зависящих от параметра $t$.
+\end{definition}
+
+\begin{example}
+  $T = \mathbb{N}$, тогда $f_n(x) = x^n$.
+\end{example}
+
+Пусть задано семейство отображений $f_t: \ X\rightarrow Y_\rho, \ Y$ -- метрическое пространство с заданной метрикой $\rho, \ t \in T$.
+
+Пусть $\mathfrak{B}$ -- база на $T$.
+
+\begin{definition}
+  Будем говорить, что семейство $\{f_t\}$ сходится в точке $x \in X$, если $f_t(x)$ как функция аргумента $t$ имеет предел по базе $\mathfrak{B}$, то есть $\exists y_x \in Y_\rho: \ \forall \epsilon > 0 \ \exists B \in \mathfrak{B}: \ \forall t \in B$
+  \begin{equation*}
+    \rho(f_t(x),y_x) < \epsilon.
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Множество $E = \{x \in X : \ \{f_t\}$ сходится в точке $x\}$ называется \textbf{областью сходимости} семейства $\{f_t\}$ по базе $\mathfrak{B}$.
+
+  Далее, на $E$ введем функцию, положив
+  \begin{equation*}
+    f(x) = \underset{\mathfrak{B}}{\lim}f_t(x).
+  \end{equation*}
+
+  Функция $f(x)$ называется \textbf{предельной}.
+\end{definition}
+
+\begin{definition}
+  Пусть дано семейство $f_t: X \rightarrow Y_u$ и $f: X \rightarrow Y$. Будем говорить, что $f_t$ сходится по базе $\mathfrak{B}$ \textbf{поточечно} к $f$ на $X$, если $\forall x \in X \ \forall \epsilon > 0 \ \exists B_x \in \mathfrak{B}: \ \forall t \in B_x$
+  \begin{equation*}
+    \rho(f_t(x),f(x)) < \epsilon.
+  \end{equation*}
+
+  Обозначение:
+  \begin{equation*}
+    f_t \underset{\mathfrak{B}}{\rightarrow} f \ (on \ X)
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Семейство $\{f_t\}$ сходится \textbf{равномерно} по базе $\mathfrak{B}$ к $f$ на $X$, если $\forall \epsilon > 0 \ \exists B \in \mathfrak{B}: \ \forall t \in B$ и $\forall x \in X$
+  \begin{equation*}
+    \rho(f_t(x),f(x)) < \epsilon
+  \end{equation*}
+
+  Обозначение:
+  \begin{equation*}
+    f_t \underset{\mathfrak{B}}{\rightrightarrows} f \ (on \ X)
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Пусть $f_n: X \rightarrow \mathbb{R}$ -- последовательность функций и $f: X \rightarrow \mathbb{R}$. Семейство $\{f_n\}$ \textbf{сходится поточечно} к $f$ на $X$, если $\forall x \in X \ \exists f(x) = \underset{n\rightarrow\infty}{\lim}f_n(x), \ \forall \epsilon > 0 \ \exists N: \ \forall n > N$
+  \begin{equation*}
+    |f_n(x) - f(x)| < \epsilon.
+  \end{equation*}
+
+  Обозначение:
+  \begin{equation*}
+    f_n \underset{n\rightarrow\infty}{\rightarrow}f \ (on \ X)
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Последовательность $\{f_n\}$ \textbf{равномерно сходится} к $f$ на $X$ при $n\rightarrow\infty$, если $\forall \epsilon > 0 \ \exists N \in \mathbb{N}: \ \forall n > N \ \forall x \in X$
+  \begin{equation*}
+    |f_n(x) - f(x)| < \epsilon.
+  \end{equation*}
+
+  Обозначение:
+  \begin{equation*}
+    f_n \underset{n\rightarrow\infty}{\rightrightarrows} f \ (on \ X)
+  \end{equation*}
+\end{definition}
+
+\begin{example}
+  $f_n: \mathbb{R}\rightarrow\mathbb{R}, \quad f_n(x) = x^n$
+
+  Имеем при фиксирвоанном $x$:
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}f_n(x) = \left\{\begin{array}{ll}
+      0,        & -1 < x < 1     \\
+      1,        & x = 1          \\
+      + \infty, & x > 1          \\
+      \nexists, & x \leqslant -1
+    \end{array}\right.
+  \end{equation*}
+
+  Таким образом область сходимости этой последовательности $E = (-1;1]$. На множестве $E$ определим предельую функцию
+  \begin{equation*}
+    f(x) = \underset{n\rightarrow\infty}{\lim}f_n(x) = \underset{n\rightarrow\infty}{\lim}x^n = \left\{\begin{array}{ll}
+      0, & x \in (-1;1) \\
+      1, & x = 1
+    \end{array}\right.
+  \end{equation*}
+
+  Покажем, что $f_n$ сходится к $f$ на $E$ неравномерно, то есть $\exists \epsilon > 0 \ \forall N \in \mathbb{N}: \ \exists n > N \ \exists x \in X:$
+  \begin{equation*}
+    |f_n(x) - f(x)| \geqslant \epsilon.
+  \end{equation*}
+
+  Возьмем $\epsilon = \frac{1}{2}$. Пусть $N$ задано произвольно. Возьмем $n = N + 1$ и $x: \ x^n = \frac{3}{4}$, то есть $x = \sqrt[n]{\frac{3}{4}}$. Тогда:
+  \begin{equation*}
+    |f_n(x) - f(x)| = \bigg|\bigg(\sqrt[n]{\frac{3}{4}}\bigg)^n - 0\bigg| = \frac{3}{4} > \frac{1}{2}
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  $f_n(x) = \frac{x}{1 + n^2x^2}$
+
+  $\forall x \in X$:
+  \begin{equation*}
+    \underset{n\rightarrow\infty}{\lim}f_n(x) = \underset{n\rightarrow\infty}{\frac{x}{1 + n^2x^2}} = 0.
+  \end{equation*}
+
+  Таким образом, $f(x) = 0 \ \forall x \in \mathbb{R}$. Покажем, что $f_n \underset{n\rightarrow\infty}{\rightrightarrows}f$ на $\mathbb{R}$.
+
+  Имеем:
+  \begin{multline*}
+    |f_n(x) - 0| = \bigg|\frac{x}{1 + n^2x^2}\bigg| = \frac{1}{2n} \cdot \bigg|\frac{2nx}{1 + n^2x^2}\bigg| \leqslant \\
+    \leqslant\left|\begin{array}{l}
+      0 \leqslant (1 - nx)^2 = 1 + n^2x^2 - 2nx \implies \\
+      \implies 2nx \leqslant 1 + n^2x^2
+    \end{array}\right| \leqslant \\
+    \leqslant \frac{1}{2n}\cdot 1 = \frac{1}{2n}
+  \end{multline*}
+
+  Пусть $\epsilon > 0$ задано. Возьмем $N: \ \forall n > N \ \frac{1}{2n} < \epsilon, \ N = [\frac{1}{2\epsilon}]$. Таким образом, $\forall n > N \ \forall x \in \mathbb{R}$
+  \begin{equation*}
+    |f_n(x) \leqslant\frac{1}{2n} < \frac{1}{2N} = \epsilon \implies
+  \end{equation*}
+  $\implies f_n(x) \underset{n\rightarrow\infty}{\rightrightarrows} f(x)$ на $\mathbb{R}^\infty$
+\end{example}
+
+\begin{example}
+  $f_n(x) = \frac{n\cdot x}{1 + n^2 x^2}, \quad \forall x \in \mathbb{R} \quad \underset{n\rightarrow\infty}{f_n(x)} = 0$
+
+  Покажем, что данное семейство не имеет равномерной сходимости к $f$.
+
+  Рассмотрим $f_n(x) - f(x) = f_n(x) = \frac{n\cdot x}{1 + n^2 x^2}$:
+  \begin{equation*}
+    f_n'(x) = \frac{n\cdot (1 + n^2 x^2) - n \cdot x \cdot (2xn^2)}{(1 + n^2 x^2)^2} = \frac{n - n^3x^2}{(1 + n^2x^2)^2} = 0, \quad x = \pm\frac{1}{n}
+  \end{equation*}
+
+  Далее, $f_n(\frac{1}{n}) = \frac{1}{2}$. Возьмем $\epsilon = \frac{1}{4}$. Тогда если $N$ задано, то выберем $n = N + 1$ и $x = \frac{1}{n}$.
+
+  Тогда $|f_n(x) - f(x)| \big|_{x = \frac{1}{n}} = \frac{1}{2} > \frac{1}{4} \implies f_n(x) \underset{n\rightarrow\infty}{\nrightrightarrows}f(x)$.
+\end{example}
+
+\begin{theorem}[критерий Коши сходимости семейства функций]
+  Пусть $Y$ -- полное метрическое пространство (М.П.), $f_t:X \rightarrow Y, \ t \in T$ -- семейство $\{f_t\}$ равномерно сходится на $X$ по базе $\mathfrak{B} \iff \forall \epsilon > 0 \exists B \in \mathfrak{B}: \ \forall t_1,t_2 \in B$ и $\forall x \in X$
+  \begin{equation*}
+    \rho(f_{t_1}(x);f_{t_2}(x)) < \epsilon
+  \end{equation*}
+\end{theorem}
+
+\begin{definition}[равномерная сходимость семейства функций по базе]
+  Будем говорить, что семейство функций $f_t: X \rightarrow Y$ \textbf{равномерно сходится на $X$ по базе} $\mathfrak{B}$, если:
+  \begin{enumerate}
+    \item $\exists f: X \rightarrow Y:$
+          \begin{equation*}
+            \underset{\mathfrak{B}}{\lim}f_t(x) = f(x), \quad \forall x \in X
+          \end{equation*}
+    \item $f_t$ сходится равномерно к $f$ на $X$ по базе $\mathfrak{B}$.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}[формулировка критерия Коши для последовательности $f_n(x)$]
+  Последовательность $f_n(x)$ равномерно сходится на $X \iff \forall \epsilon > 0 \ \exists N \in \mathbb{N}: \ \forall n > N \ \forall p > 0 \ \forall x \in X$
+  \begin{equation*}
+    \big|f_n(x) - f_{n+p}(x)\big| < \epsilon
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  $"\implies"$ Проведем доказательство для $Y = \mathbb{R}$.
+
+  Пусть семейство $f_t$ сходится равномерно на $X$ по базе $\mathfrak{B}$, то есть $\exists f(x): X \rightarrow \mathbb{R}:$
+  \begin{equation*}
+    f_t(x) \underset{\mathfrak{B}}{\rightrightarrows}f(x).
+  \end{equation*}
+
+  Покажем, что выполнено условие Коши.
+
+  Пусть $\epsilon > 0$ задано. Выберем $B \in \mathfrak{B}: \forall t \in B \ \forall x \in X$
+  \begin{equation*}
+    \big|f_t(x) - f(x)\big| < \frac{\epsilon}{2}.
+  \end{equation*}
+
+  Тогда $\forall t_1, t_2 \in B \ \forall x \in X$.
+  \begin{multline*}
+    \big|f_{t_1}(x) - f_{t_2}(x)\big| = \big|f_{t_1}(x) - f(x) + f(x) - f_{t_2}(x)\big| \leqslant \\
+    \leqslant \big|f_{t_1}(x) - f(x)\big| + \big|f_{t_2}(x) - f(x)\big| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \end{multline*}
+
+  $"\impliedby"$ Пусть $\forall \epsilon > 0 \ \exists B \in \mathfrak{B}: \forall t_1,t_2 \in B$ и $\forall x \in X$
+  \begin{equation*}
+    \big|f_{t_1}(x) - f_{t_2}(x)\big| < \epsilon \quad (\star)
+  \end{equation*}
+
+  Зафиксируем $x \in X$. Тогда выражение $(\star)$ есть точная формулировка критерия Коши существования предела функции $f_t(x)$ по базе $\mathfrak{B} \implies \forall x \in X \ \exists \underset{\mathfrak{B}}{\lim}f_t(x) = f(x)$.
+
+  Покажем, что $f_t(x) \underset{\mathfrak{B}}{\rightrightarrows}f(x)$ на $X$.
+
+  В $(\star)$ передем к пределу по базе $\mathfrak{B}$ по переменной $t_1$. Получим, что
+  \begin{equation*}
+    \big|f(x) - f_{t_2}(x)\big| < \epsilon.
+  \end{equation*}
+
+  Таким образом получаем равномерную сходимость семейства $f_{t_2}(x)$ к $f$ на $X$ по базе $\mathfrak{B}$, то есть $\forall \epsilon > 0 \ \exists B \in \mathfrak{B} \ \forall t_2 \in B$ и $\forall x \in X$
+  \begin{equation*}
+    \big|f_{t_2}(x) - f(x)\big| < \epsilon
+  \end{equation*}
+\end{proof}
+
+\begin{effect}
+  Пусть $X,Y$ -- метрические пространства, $E \subset X, \ x_0 \in E$ -- предельная точка для $E$. Семейство $f_t: X \rightarrow Y$:
+  \begin{enumerate}
+    \item $f_t$ сходится на $E$ по базе $\mathfrak{B}$;
+    \item $f_t$ расходится в точке $x_0$ по базе $\mathfrak{B}$;
+    \item $\forall t \ f_t$ непрерывно в точке $x_0$.
+  \end{enumerate}
+
+  Тогда на $E$ семейство $f_t$ сходится неравномерно.
+\end{effect}
+
+\begin{proof}
+  Применим критерий Коши, покажем, что $\exists \epsilon > 0: \ \forall B \in \mathfrak{B} \ \exists t_1, t_2 \in B$ и $\exists x \in E$:
+  \begin{equation*}
+    \rho_Y(f_{t_1}(x), f_{t_2}(x)) \geqslant \epsilon.
+  \end{equation*}
+
+  Таким образом $f_t$ расходится в точке $x_0$, то $\exists \epsilon > 0: \forall B \in \mathfrak{B} \ \exists t_1,t_2 \in B$:
+  \begin{equation*}
+    \rho_Y(f_{t_1}(x_0), f_{t_2}(x_0)) \geqslant \epsilon.
+  \end{equation*}
+
+  Так как $f_{t_1}$ и $f_{t_2}$ непрерывны, то $\exists U(x_0)\subset X: \ \forall x \in U(x_0)$
+  \begin{equation*}
+    \rho_Y(f_{t_1}(x), f_{t_2}(x)) \geqslant \epsilon.
+  \end{equation*}
+
+  Возьмем $\forall x \in U(x_0) \cap E \implies$ тогда в $x$ будет выполняться неравенство
+  \begin{equation*}
+    \rho_Y(f_{t_1}(x), f_{t_2}(x))\geqslant E \implies
+  \end{equation*}
+  $\implies f_t$ на $E$ сходится неравномерно.
+\end{proof}
+
+\begin{effect}[из следствия]
+  Если $f_t:(a,b] \rightarrow D, \ D$ -- область в $Y$:
+  \begin{enumerate}
+    \item $\forall t \ f_t$ непрерывно в точке $b$;
+    \item $f_t$ сходится на $(a,b)$ по $\mathfrak{B}$;
+    \item $f_t$ расходится в точке $b$.
+  \end{enumerate}
+
+  Тогда на $(a,b) \ f_t$ сходится неравномерно.
+\end{effect}
+
+\section{равномерная сходимость функциональных рядов}
+
+\begin{definition}[функциональный ряд]
+  Пусть $f_n: X \rightarrow\mathbb{R}, \ X$ -- произвольное множество.
+
+  \textbf{Функциональным рядом} называется выражение вида
+  \begin{equation*}
+    (\triangle)\quad \sum_{n=1}^{\infty}f_n(x).
+  \end{equation*}
+
+  Говорят, что ряд $(\triangle)$ сходится на $X$ поточечно, если на $X$ сходится поточечно последовательность его частичных сумм. Ряд $(\triangle)$ равномерно сходится на $X$, если на $X$ равномерно сходится последовательность его частичных сумм.
+\end{definition}
+
+\begin{theorem}[критерий Коши равномерной сходимости функциональных рядов]
+  Ряд $(\triangle)$ равномерно сходится на $X \iff \forall \epsilon > 0 \ \exists N: \ \forall n > N \ \forall p > 0 \ \forall x \in X$
+  \begin{equation*}
+    \big|f_{n+1}(x) + \ldots + f_{n+p}(x)\big| < \epsilon
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Самостоятельно.
+\end{proof}
+
+\begin{effect}
+  Если:
+  \begin{enumerate}
+    \item Ряд $(\triangle)$ сходится на $(a,b)$;
+    \item Расходится в точке $b$;
+    \item $\forall n \ f_n(x)$ непрерывно в точке $b$.
+  \end{enumerate}
+
+  Тогда ряд $(\triangle)$ сходится на $(a,b)$ неравномерно.
+\end{effect}
+
+\begin{proof}
+  Следует из предыдущих следствий.
+\end{proof}
+
+\begin{definition}
+  Ряд $(\triangle)$ сходится абсолютно на $X$, если на $X$ сходится ряд
+  \begin{equation*}
+    \sum_{n=1}^{\infty}\big|f_n(x)\big|
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}
+  Пусть ряды
+  \begin{equation*}
+    (A) \ \sum_{n=1}^{\infty}a_n(x), \quad (B) \ \sum_{n=1}^{\infty}b_n(x)
+  \end{equation*}
+  такие, что:
+  \begin{enumerate}
+    \item $\forall n$ функции $a_n(x)$ и $b_n(x)$ определены на $X$;
+    \item $\exists N: \ \forall n > N$
+          \begin{equation*}
+            \big|a_n(x)\big| \leqslant b_n(x) \quad \forall x \in X
+          \end{equation*}
+    \item Ряд $(B)$ сходится на $X$ равномерно.
+  \end{enumerate}
+
+  Тогда ряд $(A)$ сходится на $X$ равномерно.
+\end{theorem}
+
+\begin{proof}
+  Пусть $\epsilon > 0$ задано. Выберем $N: \ \forall n > N, \ \forall p > 0 \ \forall x \in X$
+  \begin{equation*}
+    b_{n+1}(x) + \ldots + b_{n+p}(x) < \epsilon.
+  \end{equation*}
+
+  Тогда $\forall n > N, \ \forall p > 0, \ \forall x \in X$
+  \begin{multline*}
+    \big|a_{n+1}(x) + \ldots + a_{n+p}(x)\big| \leqslant \\
+    \leqslant \big|a_{n+1}(x)\big| + \ldots + \big|a_{n+p}(x)\big| \leqslant b_{n+1}(x) + \ldots + b_{n+p}(x) < \epsilon \implies
+  \end{multline*}
+  $\implies$ по критерию Коши ряд $(A)$ сходится равномерно на $X$.
+\end{proof}
+
+\begin{effect}[Мажорантный признак Вейерштрасса]
+  Пусть
+  \begin{enumerate}
+    \item $\forall n \exists M_n:$
+    \begin{equation*}
+      \big|a_n(x)\big| \leqslant M_n \quad \forall x \in X
+    \end{equation*}
+    \item Ряд $\sum_{n=1}^{\infty} M_n$ сходится.
+  \end{enumerate}
+
+  Тогда ряд $\sum_{n=1}^{\infty}M_n$ сходится на $X$ абсолютно и равномерно.
+\end{effect}
+
+\begin{definition}[неубывающая (невозрастающая) последовательность]
+  Последовательность $f_n: X \rightarrow\mathbb{R}$ называется \textbf{неубывающей (невозрастающей)} на $X$, если $\forall x \in X$ последовательность $f_n$ не убывает (не возрастает).
+\end{definition}
+
+\begin{theorem}[признаки Абеля и Дирихле]
+  \begin{enumerate}
+    \item (Абеля)
+    
+    Пусть функции $a_n(x)$ и $b_n(x)$ удовлетворяют условиям:
+    \begin{enumerate}
+      \item Ряд $\sum_{n=1}^{\infty}a_n(x)$ сходится равномерно на $X$;
+      \item Последовательность $\{b_n(x)\}$ равномерно ограничена на $X$ и монотонна (то есть $\exists L > 0: \ \forall n \in \mathbb{N}$ и $\forall x \in X \quad \big|b_n(x)\big| \leqslant L$).
+    \end{enumerate}
+
+    Тогда ряд
+    \begin{equation*}
+      \sum_{n=1}^{\infty}(a_n(x) \cdot b_n(x))
+    \end{equation*}
+    сходится на $X$ равномерно.
+
+    \item (Дирихле)
+    
+    \begin{enumerate}
+      \item Частичные суммы ряда $\sum_{n=1}^{\infty}a_n(x)$ равномерно ограничена на $X$ (то есть $\exists M > 0: \ \forall n$ и $\forall x \in X \quad |\sum_{k=1}^{n}a_k(x)| \leqslant M$)
+    \end{enumerate}
   \end{enumerate}
 \end{theorem}
 
